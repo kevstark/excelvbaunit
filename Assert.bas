@@ -1,7 +1,7 @@
 Attribute VB_Name = "Assert"
 Option Explicit
 
-Private mTestResultManager As TestResultsManager
+Private mTestResultManager As ITestResultsManager
 
 Public Sub SetTestResultsManager(manager As TestResultsManager)
 

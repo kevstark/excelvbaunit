@@ -40,7 +40,7 @@ Friend Property Get HasTearDownFunction() As Boolean
 End Property
 
 
-Public Sub RunTests(resultsManager As TestResultsManager)
+Public Sub RunTests(resultsManager As ITestResultsManager)
 
     resultsManager.StartTestFixture mFixtureName
     
@@ -55,7 +55,7 @@ End Sub
 
 
 
-Friend Sub InvokeProc(resultsManager As TestResultsManager, FileName As String, proc As String)
+Friend Sub InvokeProc(resultsManager As ITestResultsManager, FileName As String, proc As String)
 
     resultsManager.StartTestCase proc
     Application.Run (FileName & "!" & proc)
@@ -120,7 +120,7 @@ Friend Function GetTestMethods(component As VBComponent, count As Integer) As St
     Dim proc As Integer
     For line = 1 To component.CodeModule.CountOfLines
         If IsTestMethodLine(component.CodeModule.Lines(line, 1)) Then
-            Results(proc) = component.CodeModule.ProcOfLine(line, 0)
+            Results(proc) = component.name & "." & component.CodeModule.ProcOfLine(line, 0)
             proc = proc + 1
         End If
     Next

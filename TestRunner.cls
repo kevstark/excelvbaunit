@@ -17,7 +17,7 @@ Public Sub Run(projectName As String)
     Dim fixtures() As TestFixture
     fixtures = manager.GetTestFixtures(projectName)
     
-    Dim resultsManager As TestResultsManager
+    Dim resultsManager As ITestResultsManager
     Set resultsManager = New TestResultsManager
     Assert.SetTestResultsManager resultsManager
     

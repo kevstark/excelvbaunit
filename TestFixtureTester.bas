@@ -1,15 +1,45 @@
 Attribute VB_Name = "TestFixtureTester"
 Option Explicit
 
-Public Sub TestInvoke()
+Public Sub TestInvokeProc()
 
-    AssertTrue False, "Test not yet implemented"
+    DummyTestModule3.Reset
+    
+    Dim f As TestFixture
+    Set f = New TestFixture
+    
+    Dim resultsManager As FakeTestResultsManager
+    Set resultsManager = New FakeTestResultsManager
+    f.InvokeProc resultsManager, "VbaUnit.xla", "CallMe"
+
+    AssertTrue DummyTestModule3.MeCalled
+    AssertEqual ":StartTestCase:EndTestCase", resultsManager.FunctionsCalled
     
 End Sub
 
 Public Sub TestRunTests()
+
+    DummyTestModule3.Reset
     
-    AssertTrue False, "Test not yet implemented"
+    Dim f As TestFixture
+    Set f = New TestFixture
+    
+    
+    Dim c As VBComponent
+    Set c = Application.VBE.VBProjects("VbaUnit").VBComponents("DummyTestModule3")
+    
+    f.ExtractTestCases Application.VBE.VBProjects("VbaUnit"), c
+    
+    Dim resultsManager As FakeTestResultsManager
+    Set resultsManager = New FakeTestResultsManager
+    
+    f.RunTests resultsManager
+    
+    AssertFalse DummyTestModule3.MeCalled
+    AssertTrue DummyTestModule3.Test1Called
+    AssertTrue DummyTestModule3.Test2Called
+    AssertEqual ":StartTestCase:EndTestCase:StartTestCase:EndTestCase", resultsManager.FunctionsCalled
+    
 
 End Sub
 
@@ -43,8 +73,8 @@ Public Sub TestExtractTestCases()
     s = f.TestProcedures
     
     AssertEqual 1, UBound(s)
-    AssertEqual s(0), "Test1"
-    AssertEqual s(1), "Test4"
+    AssertEqual s(0), "DummyTestModule.Test1"
+    AssertEqual s(1), "DummyTestModule.Test4"
     
     AssertTrue f.HasSetUpFunction()
     AssertTrue f.HasTearDownFunction()
@@ -124,7 +154,7 @@ Public Sub TestGetTestMethods()
     s = f.GetTestMethods(c, 2)
     
     AssertEqual 1, UBound(s)
-    AssertEqual s(0), "Test1"
-    AssertEqual s(1), "Test4"
+    AssertEqual s(0), "DummyTestModule.Test1"
+    AssertEqual s(1), "DummyTestModule.Test4"
 
 End Sub

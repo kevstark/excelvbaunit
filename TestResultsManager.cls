@@ -8,6 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
+Implements ITestResultsManager
 
 Private mTotalSuccessCount As Integer
 Private mTotalFailureCount As Integer
@@ -30,35 +31,35 @@ End Sub
 
 
 ' Override the standard test logger to ease testing this class
-Property Set TestLogger(logger As ITestLogger)
+Property Set ITestResultsManager_TestLogger(logger As ITestLogger)
     Set mTestLogger = logger
 End Property
 
-Property Get TotalSuccessCount() As Integer
-    TotalSuccessCount = mTotalSuccessCount
+Property Get ITestResultsManager_TotalSuccessCount() As Integer
+    ITestResultsManager_TotalSuccessCount = mTotalSuccessCount
 End Property
 
-Property Get TotalFailureCount() As Integer
-    TotalFailureCount = mTotalFailureCount
+Property Get ITestResultsManager_TotalFailureCount() As Integer
+    ITestResultsManager_TotalFailureCount = mTotalFailureCount
 End Property
 
-Property Get FixtureSuccessCount() As Integer
-    FixtureSuccessCount = mFixtureSuccessCount
+Property Get ITestResultsManager_FixtureSuccessCount() As Integer
+    ITestResultsManager_FixtureSuccessCount = mFixtureSuccessCount
 End Property
 
-Property Get FixtureFailureCount() As Integer
-    FixtureFailureCount = mFixtureFailureCount
+Property Get ITestResultsManager_FixtureFailureCount() As Integer
+    ITestResultsManager_FixtureFailureCount = mFixtureFailureCount
 End Property
 
-Property Get TestCaseSuccessCount() As Integer
-    TestCaseSuccessCount = mTestCaseSuccessCount
+Property Get ITestResultsManager_TestCaseSuccessCount() As Integer
+    ITestResultsManager_TestCaseSuccessCount = mTestCaseSuccessCount
 End Property
 
-Property Get TestCaseFailureCount() As Integer
-    TestCaseFailureCount = mTestCaseFailureCount
+Property Get ITestResultsManager_TestCaseFailureCount() As Integer
+    ITestResultsManager_TestCaseFailureCount = mTestCaseFailureCount
 End Property
 
-Public Sub LogSuccess()
+Public Sub ITestResultsManager_LogSuccess()
 
     mTotalSuccessCount = mTotalSuccessCount + 1
     mFixtureSuccessCount = mFixtureSuccessCount + 1
@@ -66,7 +67,7 @@ Public Sub LogSuccess()
     
 End Sub
 
-Public Sub LogFailure(msg As String)
+Public Sub ITestResultsManager_LogFailure(msg As String)
 
     mTotalFailureCount = mTotalFailureCount + 1
     mFixtureFailureCount = mFixtureFailureCount + 1
@@ -76,7 +77,7 @@ Public Sub LogFailure(msg As String)
 
 End Sub
 
-Public Sub StartTestFixture(name As String)
+Public Sub ITestResultsManager_StartTestFixture(name As String)
 
     mTestLogger.LogMsg "Start: " & name
     mTestCaseSuccessCount = 0
@@ -87,7 +88,7 @@ Public Sub StartTestFixture(name As String)
 
 End Sub
 
-Public Sub EndTestFixture()
+Public Sub ITestResultsManager_EndTestFixture()
 
     mTestLogger.LogMsg mFixtureSuccessCount & " passes, " & mFixtureFailureCount & " failures"
     mTestLogger.LogMsg "==================="
@@ -95,7 +96,7 @@ Public Sub EndTestFixture()
 
 End Sub
 
-Public Sub StartTestCase(name As String)
+Public Sub ITestResultsManager_StartTestCase(name As String)
 
     mTestCaseName = name
     mTestCaseSuccessCount = 0
@@ -103,13 +104,13 @@ Public Sub StartTestCase(name As String)
     
 End Sub
 
-Public Sub EndTestCase()
+Public Sub ITestResultsManager_EndTestCase()
 
     mTestLogger.LogMsg mTestCaseName & ": " & mTestCaseSuccessCount & " passes, " & mTestCaseFailureCount & " failures"
     
 End Sub
 
-Public Sub EndTestSuite()
+Public Sub ITestResultsManager_EndTestSuite()
 
     mTestLogger.LogMsg "Total: " & mTotalSuccessCount & " passes, " & mTotalFailureCount & " failures"
 

@@ -46,7 +46,7 @@ Public Sub ITestResultsManager_EndTestFixture()
 End Sub
 
 Public Sub ITestResultsManager_StartTestCase(name As String)
-    FunctionsCalled = FunctionsCalled & ":StartTestCase"
+    FunctionsCalled = FunctionsCalled & ":StartTestCase(" & name & ")"
 End Sub
 
 Public Sub ITestResultsManager_EndTestCase()
@@ -54,5 +54,6 @@ Public Sub ITestResultsManager_EndTestCase()
 End Sub
 
 Public Sub ITestResultsManager_EndTestSuite()
+    FunctionsCalled = FunctionsCalled & ":EndTestSuite"
 End Sub
 

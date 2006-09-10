@@ -3,7 +3,7 @@ Option Explicit
 
 Private mTestResultManager As ITestResultsManager
 
-Public Sub SetTestResultsManager(manager As TestResultsManager)
+Public Sub SetTestResultsManager(manager As ITestResultsManager)
 
     Set mTestResultManager = manager
     

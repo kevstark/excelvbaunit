@@ -38,7 +38,28 @@ Public Function GetTestFixtures(projectName As String) As TestFixture()
 End Function
 
 
-Private Function GetTestingComponents(project As VBProject)
+
+Public Function GetTestFixture(projectName As String, fixtureName As String) As TestFixture
+
+    Dim project As VBProject
+    Set project = Application.VBE.VBProjects(projectName)
+    ' Project not found?
+    
+    ' Get list of modules containing test cases
+    Dim component As VBComponent
+    Set component = project.VBComponents(fixtureName)
+            
+    ' Each module corresponds to a fixture
+    Dim fixture As TestFixture: Set fixture = New TestFixture
+    fixture.ExtractTestCases project, component
+    
+    Set GetTestFixture = fixture
+
+End Function
+
+
+
+Friend Function GetTestingComponents(project As VBProject) As VBComponent()
 
     Dim count As Integer
     count = GetTestingComponentsCount(project)
@@ -60,7 +81,7 @@ End Function
 
 
 
-Private Function GetTestingComponentsCount(project As VBProject)
+Friend Function GetTestingComponentsCount(project As VBProject) As Integer
 
     Dim count As Integer
     Dim component As VBComponent
@@ -75,8 +96,8 @@ Private Function GetTestingComponentsCount(project As VBProject)
 End Function
 
 
-
-Private Function IsTestComponent(component As VBComponent)
+' Counts the number of modules containing tests in a project
+Friend Function IsTestComponent(component As VBComponent) As Boolean
 
     IsTestComponent = False
     If component.Type = vbext_ct_StdModule Then

@@ -27,8 +27,8 @@ Property Get FileName() As String
     FileName = mFileName
 End Property
 
-Property Get FixtureName() As String
-    FixtureName = mFixtureName
+Property Get fixtureName() As String
+    fixtureName = mFixtureName
 End Property
 
 Friend Property Get HasSetUpFunction() As Boolean

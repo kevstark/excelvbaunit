@@ -13,7 +13,7 @@ Public Sub TestInvokeProc()
     f.InvokeProc resultsManager, "VbaUnit.xla", "CallMe"
 
     AssertTrue DummyTestModule3.MeCalled
-    AssertEqual ":StartTestCase:EndTestCase", resultsManager.FunctionsCalled
+    AssertEqual ":StartTestCase(CallMe):EndTestCase", resultsManager.FunctionsCalled
     
 End Sub
 
@@ -38,7 +38,7 @@ Public Sub TestRunTests()
     AssertFalse DummyTestModule3.MeCalled
     AssertTrue DummyTestModule3.Test1Called
     AssertTrue DummyTestModule3.Test2Called
-    AssertEqual ":StartTestCase:EndTestCase:StartTestCase:EndTestCase", resultsManager.FunctionsCalled
+    AssertEqual ":StartTestCase(DummyTestModule3.Test1):EndTestCase:StartTestCase(DummyTestModule3.Test2):EndTestCase", resultsManager.FunctionsCalled
     
 
 End Sub
@@ -67,7 +67,7 @@ Public Sub TestExtractTestCases()
     
     f.ExtractTestCases Application.VBE.VBProjects("VbaUnit"), c
     AssertEqual "VbaUnit.xla", f.FileName
-    AssertEqual "DummyTestModule", f.FixtureName
+    AssertEqual "DummyTestModule", f.fixtureName
         
     Dim s() As String
     s = f.TestProcedures

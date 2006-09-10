@@ -5,6 +5,9 @@ Public Sub xRun(projectName As String)
 
     Dim runner As TestRunner
     Set runner = New TestRunner
-    runner.Run projectName
+        
+    Dim resultsManager As ITestResultsManager
+    Set resultsManager = New TestResultsManager
+    runner.Run projectName, resultsManager
 
 End Sub

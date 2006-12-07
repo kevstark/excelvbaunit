@@ -41,4 +41,15 @@ Public Sub AssertEqual(expected As Variant, actual As Variant, Optional msg As S
 
 End Sub
 
+Public Sub AssertSuccess()
+
+    mTestResultManager.LogSuccess
+
+End Sub
+
+Public Sub AssertFailure(Optional msg As String = "")
+
+    mTestResultManager.LogFailure "Failure. " & msg
+
+End Sub
 

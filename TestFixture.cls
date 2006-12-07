@@ -46,7 +46,16 @@ Public Sub RunTests(resultsManager As ITestResultsManager)
     
     Dim i As Integer
     For i = 0 To UBound(mTestProcedures)
+        If HasSetUpFunction Then
+            Application.Run ("'" & FileName & "'!" & mFixtureName & "." & SetUpFunctionName)
+        End If
+        
         InvokeProc resultsManager, mFileName, mTestProcedures(i)
+        
+        If HasTearDownFunction Then
+            Application.Run ("'" & FileName & "'!" & mFixtureName & "." & TearDownFunctionName)
+        End If
+        
     Next
     
     resultsManager.EndTestFixture
@@ -58,7 +67,7 @@ End Sub
 Friend Sub InvokeProc(resultsManager As ITestResultsManager, FileName As String, proc As String)
 
     resultsManager.StartTestCase proc
-    Application.Run (FileName & "!" & proc)
+    Application.Run ("'" & FileName & "'!" & proc)
     resultsManager.EndTestCase
     
 End Sub

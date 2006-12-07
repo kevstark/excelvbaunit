@@ -40,6 +40,8 @@ Public Sub TestRunTests()
     AssertTrue DummyTestModule3.Test2Called
     AssertEqual ":StartTestCase(DummyTestModule3.Test1):EndTestCase:StartTestCase(DummyTestModule3.Test2):EndTestCase", resultsManager.FunctionsCalled
     
+    AssertEqual 2, DummyTestModule3.SetUpCalled
+    AssertEqual 2, DummyTestModule3.TearDownCalled
 
 End Sub
 

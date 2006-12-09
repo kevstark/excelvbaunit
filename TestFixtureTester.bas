@@ -83,6 +83,8 @@ Public Sub TestExtractTestCases()
     
 End Sub
 
+
+' Tests for checking test case and test  fixture level set up/tear down functions
 Public Sub TestExtractSetUpTearDown()
 
     Dim f As TestFixture
@@ -95,6 +97,9 @@ Public Sub TestExtractSetUpTearDown()
     
     AssertTrue f.HasSetUpFunction()
     AssertFalse f.HasTearDownFunction()
+    
+    AssertTrue f.HasFixtureSetUpFunction()
+    AssertFalse f.HasFixtureTearDownFunction()
     
 End Sub
 

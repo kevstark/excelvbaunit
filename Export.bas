@@ -1,6 +1,10 @@
 Attribute VB_Name = "Export"
 Option Explicit
 
+Public Sub ExportThisCode(dir As String)
+    ExportAllCode dir, "VbaUnit"
+End Sub
+
 ' Functions to export and remove vba code from an add in.
 Public Sub ExportAllCode(dir As String, projectName As String)
 

@@ -11,20 +11,20 @@ Option Explicit
 
 Public Sub Run(projectName As String, _
                resultsManager As ITestResultsManager, _
-               Optional fixtureName As String = Empty)
+               Optional fixtureNameToBeRun As String = Empty)
 
     Dim manager As TestManager
     Set manager = New TestManager
     
     Dim fixtures() As TestFixture
-    fixtures = GetTestFixtures(projectName, manager, fixtureName)
+    fixtures = GetTestFixtures(projectName, manager, fixtureNameToBeRun)
 
     Assert.SetTestResultsManager resultsManager
     
     Dim i As Integer
     For i = 0 To UBound(fixtures)
-        ' Only run named fixture if specified
-        If fixtureName = "" Or fixtureName = fixtures(i).fixtureName Then
+        ' If a specific specific was named, then run only that fixture
+        If (ShouldRunFixture(fixtures(i), fixtureNameToBeRun)) Then
             fixtures(i).RunTests resultsManager
         End If
     Next
@@ -33,7 +33,7 @@ Public Sub Run(projectName As String, _
 
 End Sub
 
-Friend Function ShouldRunFixture(fixture, fixtureNameToBeRun) As Boolean
+Friend Function ShouldRunFixture(fixture As TestFixture, fixtureNameToBeRun As String) As Boolean
 
     If fixtureNameToBeRun = "" Or fixtureNameToBeRun = fixture.fixtureName Then
         ShouldRunFixture = True

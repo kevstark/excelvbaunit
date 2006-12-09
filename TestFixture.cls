@@ -12,12 +12,16 @@ Option Explicit
 Const TestMethodPrefix = "Public Sub Test"
 Const SetUpFunctionName = "SetUp"
 Const TearDownFunctionName = "TearDown"
+Const FixtureSetUpFunctionName = "FixtureSetUp"
+Const FixtureTearDownFunctionName = "FixtureTearDown"
 
 Private mTestProcedures() As String
 Private mFileName As String
 Private mFixtureName As String
 Private mHasSetUpFunction As Boolean
 Private mHasTearDownFunction As Boolean
+Private mHasFixtureSetUpFunction As Boolean
+Private mHasFixtureTearDownFunction As Boolean
 
 Property Get TestProcedures() As String()
     TestProcedures = mTestProcedures
@@ -37,6 +41,14 @@ End Property
 
 Friend Property Get HasTearDownFunction() As Boolean
     HasTearDownFunction = mHasTearDownFunction
+End Property
+
+Friend Property Get HasFixtureSetUpFunction() As Boolean
+    HasFixtureSetUpFunction = mHasFixtureSetUpFunction
+End Property
+
+Friend Property Get HasFixtureTearDownFunction() As Boolean
+    HasFixtureTearDownFunction = mHasFixtureTearDownFunction
 End Property
 
 
@@ -86,6 +98,9 @@ Public Sub ExtractTestCases(project As VBProject, component As VBComponent)
     
     mHasSetUpFunction = DoesMethodExist(SetUpFunctionName, component)
     mHasTearDownFunction = DoesMethodExist(TearDownFunctionName, component)
+    
+    mHasFixtureSetUpFunction = DoesMethodExist(FixtureSetUpFunctionName, component)
+    mHasFixtureTearDownFunction = DoesMethodExist(FixtureTearDownFunctionName, component)
     
 End Sub
 

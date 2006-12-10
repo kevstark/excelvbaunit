@@ -44,10 +44,11 @@ Public Sub TestGetTestingComponents()
     
     AssertEqual 4, UBound(cs)
     AssertEqual 0, LBound(cs)
-    AssertEqual "TestFixtureTester", cs(0).name
-    AssertEqual "TestManagerTester", cs(1).name
-    AssertEqual "TestResultsManagerTester", cs(2).name
-    AssertEqual "TestRunnerTester", cs(3).name
+    AssertEqual "MainTester", cs(0).name
+    AssertEqual "TestFixtureTester", cs(1).name
+    AssertEqual "TestManagerTester", cs(2).name
+    AssertEqual "TestResultsManagerTester", cs(3).name
+    AssertEqual "TestRunnerTester", cs(4).name
 
 End Sub
 
@@ -72,10 +73,11 @@ Public Sub TestGetTestFixtures()
     AssertEqual 4, UBound(tfs)
     AssertEqual 0, LBound(tfs)
     
-    AssertEqual "TestFixtureTester", tfs(0).fixtureName
-    AssertEqual "TestManagerTester", tfs(1).fixtureName
-    AssertEqual "TestResultsManagerTester", tfs(2).fixtureName
-    AssertEqual "TestRunnerTester", tfs(3).fixtureName
+    AssertEqual "MainTester", tfs(0).fixtureName
+    AssertEqual "TestFixtureTester", tfs(1).fixtureName
+    AssertEqual "TestManagerTester", tfs(2).fixtureName
+    AssertEqual "TestResultsManagerTester", tfs(3).fixtureName
+    AssertEqual "TestRunnerTester", tfs(4).fixtureName
     
     
 End Sub

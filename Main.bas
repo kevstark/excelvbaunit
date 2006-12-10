@@ -19,3 +19,25 @@ Public Sub xRun(projectName As String, _
 
 End Sub
 
+
+
+' Factory function so can use test manager functions outside the add in. As the class is stateless it doesn't
+' matter that we return a new instance with this call
+Public Function GetTestManager() As TestManager
+
+    Set GetTestManager = New TestManager
+    
+End Function
+
+
+Public Function SafeUbound(var As Variant) As Long
+
+On Error GoTo err
+    
+    SafeUbound = UBound(var)
+    Exit Function
+    
+err:
+    SafeUbound = -1
+End Function
+

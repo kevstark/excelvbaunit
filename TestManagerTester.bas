@@ -28,7 +28,7 @@ Public Sub TestGetTestingComponentsCount()
     Set p = Application.VBE.VBProjects("VbaUnit")
 
     ' This test will start to fail if you add new test modules to this add in
-    AssertEqual 4, tm.GetTestingComponentsCount(p)
+    AssertEqual 5, tm.GetTestingComponentsCount(p)
 
 End Sub
 
@@ -42,7 +42,7 @@ Public Sub TestGetTestingComponents()
     Dim cs() As VBComponent
     cs = tm.GetTestingComponents(p)
     
-    AssertEqual 3, UBound(cs)
+    AssertEqual 4, UBound(cs)
     AssertEqual 0, LBound(cs)
     AssertEqual "TestFixtureTester", cs(0).name
     AssertEqual "TestManagerTester", cs(1).name
@@ -69,7 +69,7 @@ Public Sub TestGetTestFixtures()
     
     tfs = tm.GetTestFixtures("VbaUnit")
     
-    AssertEqual 3, UBound(tfs)
+    AssertEqual 4, UBound(tfs)
     AssertEqual 0, LBound(tfs)
     
     AssertEqual "TestFixtureTester", tfs(0).fixtureName

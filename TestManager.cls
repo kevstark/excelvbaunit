@@ -6,7 +6,7 @@ Attribute VB_Name = "TestManager"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
-Attribute VB_Exposed = False
+Attribute VB_Exposed = True
 Option Explicit
 
 Private Const TestModulePrefix = "Test"
@@ -24,18 +24,23 @@ Public Function GetTestFixtures(projectName As String) As TestFixture()
     components = GetTestingComponents(project)
     
     ' Each module corresponds to a fixture
+    Dim fixtures() As TestFixture
     Dim count As Integer
-    count = UBound(components)
-    ReDim fixtures(0 To count) As TestFixture
+    count = Main.SafeUbound(components)
     
-    Dim i As Integer
-    For i = 0 To count
-        Set fixtures(i) = New TestFixture
-        fixtures(i).ExtractTestCases project, components(i)
-    Next
+    If count > 0 Then
+        ReDim fixtures(0 To count) As TestFixture
+        
+        Dim i As Integer
+        For i = 0 To count
+            Set fixtures(i) = New TestFixture
+            fixtures(i).ExtractTestCases project, components(i)
+        Next
+    End If
     
     GetTestFixtures = fixtures
 End Function
+
 
 
 
@@ -61,19 +66,23 @@ End Function
 
 Friend Function GetTestingComponents(project As VBProject) As VBComponent()
 
+    Dim testingComponents() As VBComponent
+    
     Dim count As Integer
     count = GetTestingComponentsCount(project)
     
-    ReDim testingComponents(0 To count - 1) As VBComponent
-    Dim component As VBComponent
-    Dim i As Integer
-    For Each component In project.VBComponents
-        If IsTestComponent(component) Then
-            Set testingComponents(i) = component
-            i = i + 1
-        End If
-        
-    Next
+    If count > 0 Then
+        ReDim testingComponents(0 To count - 1) As VBComponent
+        Dim component As VBComponent
+        Dim i As Integer
+        For Each component In project.VBComponents
+            If IsTestComponent(component) Then
+                Set testingComponents(i) = component
+                i = i + 1
+            End If
+            
+        Next
+    End If
     
     GetTestingComponents = testingComponents
 

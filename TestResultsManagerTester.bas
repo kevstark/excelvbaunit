@@ -5,7 +5,7 @@ Public Sub TestLogSuccess()
 
     Dim trm As ITestResultsManager
     Set trm = New TestResultsManager
-    Set trm.TestLogger = New FakeDebugTestLogger
+    Set trm.testLogger = New FakeDebugTestLogger
     
     trm.LogSuccess
     trm.LogFailure "Failure 1"
@@ -25,7 +25,7 @@ Public Sub TestLogFailure()
     
     Dim logger As FakeDebugTestLogger
     Set logger = New FakeDebugTestLogger
-    Set trm.TestLogger = logger
+    Set trm.testLogger = logger
     
     trm.LogSuccess
     trm.LogFailure "Failure 1"
@@ -35,7 +35,7 @@ Public Sub TestLogFailure()
     
     AssertEqual 3, trm.TestCaseFailureCount
     
-    AssertEqual ": failed. Failure 1: failed. Failure 2: failed. Failure 3", logger.message
+    AssertEqual ":Success: Failure 1 Failed: Failure 2 Failed: Failure 3 Failed:Success", logger.message
 
 End Sub
 
@@ -46,7 +46,7 @@ Public Sub TestTestCase()
     
     Dim logger As FakeDebugTestLogger
     Set logger = New FakeDebugTestLogger
-    Set trm.TestLogger = logger
+    Set trm.testLogger = logger
     
     trm.StartTestCase "Test Case 1"
     trm.LogFailure "Failure 1"
@@ -75,7 +75,7 @@ Public Sub TestTestFixture()
     
     Dim logger As FakeDebugTestLogger
     Set logger = New FakeDebugTestLogger
-    Set trm.TestLogger = logger
+    Set trm.testLogger = logger
     
     trm.StartTestFixture "Fixture 1"
     trm.StartTestCase "Test Case 1"
@@ -101,7 +101,7 @@ Public Sub TestTestSuite()
     
     Dim logger As FakeDebugTestLogger
     Set logger = New FakeDebugTestLogger
-    Set trm.TestLogger = logger
+    Set trm.testLogger = logger
     
         
     trm.StartTestFixture "Fixture 1"

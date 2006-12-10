@@ -9,6 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
+' Control the listof tests within a test fixtures, ie with a test module
 Const TestMethodPrefix = "Public Sub Test"
 Const SetUpFunctionName = "SetUp"
 Const TearDownFunctionName = "TearDown"

@@ -9,7 +9,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-Property Set TestLogger(logger As ITestLogger)
+Property Set testLogger(logger As ITestLogger)
 End Property
 
 Property Get TotalSuccessCount() As Integer
@@ -51,3 +51,6 @@ End Sub
 Public Sub EndTestSuite()
 End Sub
 
+
+Public Property Let ExpectedNumTestCases(count As Long)
+End Property

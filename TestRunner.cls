@@ -19,11 +19,11 @@ Public Sub Run(projectName As String, _
     Dim fixtures() As TestFixture
     fixtures = GetTestFixtures(projectName, manager, fixtureNameToBeRun)
 
-    Assert.SetTestResultsManager resultsManager
+    SetUpResultsManager resultsManager, fixtures, fixtureNameToBeRun
     
     Dim i As Integer
     For i = 0 To UBound(fixtures)
-        ' If a specific specific was named, then run only that fixture
+        ' If a specific test fixture was named, then run only that fixture
         If (ShouldRunFixture(fixtures(i), fixtureNameToBeRun)) Then
             fixtures(i).RunTests resultsManager
         End If
@@ -32,6 +32,29 @@ Public Sub Run(projectName As String, _
     resultsManager.EndTestSuite
 
 End Sub
+
+
+Private Sub SetUpResultsManager(resultsManager As ITestResultsManager, _
+                                fixtures() As TestFixture, _
+                                fixtureNameToBeRun As String)
+
+    ' Assert class need to know the results manager so it can keep track of success and failures
+    Assert.SetTestResultsManager resultsManager
+
+    ' Results manager need to know how many tests case to expect to help it logging progress
+    Dim i As Long
+    Dim testCaseCount As Long
+    For i = 0 To UBound(fixtures)
+        If (ShouldRunFixture(fixtures(i), fixtureNameToBeRun)) Then
+            testCaseCount = testCaseCount + UBound(fixtures(i).TestProcedures) + 1
+        End If
+    Next
+    
+    resultsManager.ExpectedNumTestCases = testCaseCount
+
+End Sub
+
+
 
 Friend Function ShouldRunFixture(fixture As TestFixture, fixtureNameToBeRun As String) As Boolean
 

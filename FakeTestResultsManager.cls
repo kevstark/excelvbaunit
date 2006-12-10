@@ -57,3 +57,6 @@ Public Sub ITestResultsManager_EndTestSuite()
     FunctionsCalled = FunctionsCalled & ":EndTestSuite"
 End Sub
 
+Public Property Let ITestResultsManager_ExpectedNumTestCases(count As Long)
+End Property
+

@@ -28,7 +28,7 @@ Public Function GetTestFixtures(projectName As String) As TestFixture()
     Dim count As Integer
     count = Main.SafeUbound(components)
     
-    If count > 0 Then
+    If count >= 0 Then
         ReDim fixtures(0 To count) As TestFixture
         
         Dim i As Integer

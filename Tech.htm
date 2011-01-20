@@ -1,0 +1,1940 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>VbaUnit version 14 - Unit Test harness for Excel VBA - Technical Documentation</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:" />
+</head>
+
+<body style="background-color: white">
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+<ul>
+
+	<li><a href="#introduction">Introduction</a></li>
+	<ul>
+
+		<li><a href="#overview__by_mh_">Overview (by MH)</a></li>
+		<li><a href="#to_do">To do</a></li>
+		<li><a href="#change_log">Change Log</a></li>
+		<ul>
+
+			<li><a href="#changes_from_version_r13">Changes from version r13</a></li>
+			<li><a href="#changes_in_previous_versions">Changes in previous versions</a></li>
+		</ul>
+
+		<li><a href="#authors">Authors</a></li>
+		<li><a href="#copyright">Copyright</a></li>
+	</ul>
+
+	<li><a href="#technical_documentation">Technical Documentation</a></li>
+	<ul>
+
+		<li><a href="#hints_for_developers">Hints for Developers</a></li>
+		<li><a href="#named_ranges">Named Ranges</a></li>
+		<li><a href="#modpod">modPOD</a></li>
+		<li><a href="#sheet1">Sheet1</a></li>
+		<li><a href="#thisworkbook">ThisWorkbook</a></li>
+		<li><a href="#assert">Assert</a></li>
+		<ul>
+
+			<li><a href="#assert_macros">Assert  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_assert_settestresultsmanager">Function Assert  SetTestResultsManager</a></li>
+				<li><a href="#function_assert_asserttrue">Function Assert  AssertTrue</a></li>
+				<li><a href="#function_assert_assertfalse">Function Assert  AssertFalse</a></li>
+				<li><a href="#function_assert_assertequal">Function Assert  AssertEqual</a></li>
+				<li><a href="#function_assert_assertsuccess">Function Assert  AssertSuccess</a></li>
+				<li><a href="#function_assert_assertfailure">Function Assert  AssertFailure</a></li>
+				<li><a href="#function_assert_backuptrm">Function Assert  BackupTRM</a></li>
+				<li><a href="#function_assert_restoretrm">Function Assert  RestoreTRM</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#asserttester">AssertTester</a></li>
+		<ul>
+
+			<li><a href="#asserttester_macros">AssertTester  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_testasserttrue">Function TestAssertTrue</a></li>
+				<li><a href="#function_testassertfalse">Function TestAssertFalse</a></li>
+				<li><a href="#function_testassertequal">Function TestAssertEqual</a></li>
+				<li><a href="#function_testassertsuccess">Function TestAssertSuccess</a></li>
+				<li><a href="#function_testassertfailure">Function TestAssertFailure</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#export">Export</a></li>
+		<ul>
+
+			<li><a href="#export_macros">Export  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_export_exportallcode">Function Export  ExportAllCode</a></li>
+				<li><a href="#function_export_deleteallcode">Function Export  DeleteAllCode</a></li>
+				<li><a href="#function_export_getcodemodules">Function Export  GetCodeModules</a></li>
+				<li><a href="#function_export_getexportfilename">Function Export  GetExportFileName</a></li>
+				<li><a href="#function_export_getexportfilenamesuffix">Function Export  GetExportFileNameSuffix</a></li>
+				<li><a href="#function_export_iscodemodule">Function Export  IsCodeModule</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#modretrofit">modRetroFit</a></li>
+		<ul>
+
+			<li><a href="#modretrofit_macros">modRetroFit  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_modretrofit_retrofit">Function modRetroFit  RetroFit</a></li>
+				<li><a href="#function_modretrofit_correctmod">Function modRetroFit  CorrectMod</a></li>
+				<li><a href="#function_modretrofit_projfound">Function modRetroFit  ProjFound</a></li>
+				<li><a href="#function_modretrofit_modfound">Function modRetroFit  ModFound</a></li>
+				<li><a href="#function_modretrofit_addstubs">Function modRetroFit  AddStubs</a></li>
+				<li><a href="#function_modretrofit_addpodhead">Function modRetroFit  AddPODHead</a></li>
+				<li><a href="#function_modretrofit_addpodproc">Function modRetroFit  AddPODProc</a></li>
+				<li><a href="#function_modretrofit_instrap">Function modRetroFit  InsTrap</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#modretrofittester">modRetroFitTester</a></li>
+		<ul>
+
+			<li><a href="#modretrofittester_macros">modRetroFitTester  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_testcorrectmod">Function TestCorrectMod</a></li>
+				<li><a href="#function_testprojfound">Function TestProjFound</a></li>
+				<li><a href="#function_testmodfound">Function TestModFound</a></li>
+				<li><a href="#function_testaddstubs">Function TestAddStubs</a></li>
+				<li><a href="#function_testaddpodhead">Function TestAddPODHead</a></li>
+				<li><a href="#function_testaddpodproc">Function TestAddPODProc</a></li>
+				<li><a href="#function_testinstrap">Function TestInsTrap</a></li>
+				<li><a href="#function_setup">Function SetUp</a></li>
+				<li><a href="#function_teardown">Function TearDown</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#modcoverage">modCoverage</a></li>
+		<ul>
+
+			<li><a href="#modcoverage_macros">modCoverage  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_modcoverage_setuparrays">Function modCoverage  SetUpArrays</a></li>
+				<li><a href="#function_modcoverage_inarray">Function modCoverage  InArray</a></li>
+				<li><a href="#function_modcoverage_extractmods">Function modCoverage  ExtractMods</a></li>
+				<li><a href="#function_modcoverage_matchmods">Function modCoverage  MatchMods</a></li>
+				<li><a href="#function_modcoverage_gettesters">Function modCoverage  GetTesters</a></li>
+				<li><a href="#function_modcoverage_getprocs">Function modCoverage  GetProcs</a></li>
+				<li><a href="#function_modcoverage_procnames">Function modCoverage  ProcNames</a></li>
+				<li><a href="#function_modcoverage_maponename">Function modCoverage  MapOneName</a></li>
+				<li><a href="#function_modcoverage_startcoverall">Function modCoverage  StartCoverAll</a></li>
+				<li><a href="#function_modcoverage_startcovermod">Function modCoverage  StartCoverMod</a></li>
+				<li><a href="#function_modcoverage_endcovermod">Function modCoverage  EndCoverMod</a></li>
+				<li><a href="#function_modcoverage_endcoverall">Function modCoverage  EndCoverAll</a></li>
+				<li><a href="#function_modcoverage_stripsetup">Function modCoverage  StripSetUp</a></li>
+				<li><a href="#function_modcoverage_coverage">Function modCoverage  Coverage</a></li>
+				<li><a href="#function_modcoverage_mapnames">Function modCoverage  MapNames</a></li>
+				<li><a href="#function_modcoverage_pop">Function modCoverage  Pop</a></li>
+				<li><a href="#function_modcoverage_coversingle">Function modCoverage  CoverSingle</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#modcoveragetester">modCoverageTester</a></li>
+		<ul>
+
+			<li><a href="#modcoveragetester_macros">modCoverageTester  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_modcoveragetester_testsetuparrays">Function modCoverageTester  TestSetUpArrays</a></li>
+				<li><a href="#function_modcoveragetester_testinarray">Function modCoverageTester  TestInArray</a></li>
+				<li><a href="#function_modcoveragetester_testextractmods">Function modCoverageTester  TestExtractMods</a></li>
+				<li><a href="#function_modcoveragetester_testmatchmods">Function modCoverageTester  TestMatchMods</a></li>
+				<li><a href="#function_modcoveragetester_testgettesters">Function modCoverageTester  TestGetTesters</a></li>
+				<li><a href="#function_modcoveragetester_testgetprocs">Function modCoverageTester  TestGetProcs</a></li>
+				<li><a href="#function_modcoveragetester_testprocnames">Function modCoverageTester  TestProcNames</a></li>
+				<li><a href="#function_modcoveragetester_testmapnames">Function modCoverageTester  TestMapNames</a></li>
+				<li><a href="#function_modcoveragetester_testmaponename">Function modCoverageTester  TestMapOneName</a></li>
+				<li><a href="#function_modcoveragetester_teststripsetup">Function modCoverageTester  TestStripSetUp</a></li>
+				<li><a href="#function_modcoveragetester_testpop">Function modCoverageTester  TestPop</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#main">Main</a></li>
+		<ul>
+
+			<li><a href="#main_macros">Main  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_main_xrun">Function Main  xRun</a></li>
+				<li><a href="#function_main_gettestmanager">Function Main  GetTestManager</a></li>
+				<li><a href="#function_main_safeubound">Function Main  SafeUbound</a></li>
+				<li><a href="#function_main_getnames">Function Main  GetNames</a></li>
+				<li><a href="#function_main_dudproj">Function Main  DudProj</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#maintester">MainTester</a></li>
+		<ul>
+
+			<li><a href="#maintester_macros">MainTester  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_maintester_testgettestmanager">Function MainTester  TestGetTestManager</a></li>
+				<li><a href="#function_maintester_testsafeubound">Function MainTester  TestSafeUbound</a></li>
+				<li><a href="#function_maintester_testgetnames">Function MainTester  TestGetNames</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#testfixturetester">TestFixtureTester</a></li>
+		<ul>
+
+			<li><a href="#testfixturetester_macros">TestFixtureTester  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_testfixturetester_testinvokeproc">Function TestFixtureTester  TestInvokeProc</a></li>
+				<li><a href="#function_testfixturetester_testruntests">Function TestFixtureTester  TestRunTests</a></li>
+				<li><a href="#function_testfixturetester_testdoesmethodexist">Function TestFixtureTester  TestDoesMethodExist</a></li>
+				<li><a href="#function_testfixturetester_testextracttestcases">Function TestFixtureTester  TestExtractTestCases</a></li>
+				<li><a href="#function_testfixturetester_testextractsetupteardown">Function TestFixtureTester  TestExtractSetUpTearDown</a></li>
+				<li><a href="#function_testfixturetester_testextractfilename">Function TestFixtureTester  TestExtractFileName</a></li>
+				<li><a href="#function_testfixturetester_testistestmethodline">Function TestFixtureTester  TestIsTestMethodLine</a></li>
+				<li><a href="#function_testfixturetester_testgettestmethods">Function TestFixtureTester  TestGetTestMethods</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#testmanagertester">TestManagerTester</a></li>
+		<ul>
+
+			<li><a href="#testmanagertester_macros">TestManagerTester  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_testmanagertester_testistestcomponent">Function TestManagerTester  TestIsTestComponent</a></li>
+				<li><a href="#function_testmanagertester_testgettestingcomponentscount">Function TestManagerTester  TestGetTestingComponentsCount</a></li>
+				<li><a href="#function_testmanagertester_testgettestingcomponents">Function TestManagerTester  TestGetTestingComponents</a></li>
+				<li><a href="#function_testmanagertester_testgettestfixture">Function TestManagerTester  TestGetTestFixture</a></li>
+				<li><a href="#function_testmanagertester_testgettestfixtures">Function TestManagerTester  TestGetTestFixtures</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#testresultsmanagertester">TestResultsManagerTester</a></li>
+		<ul>
+
+			<li><a href="#testresultsmanagertester_macros">TestResultsManagerTester  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_testresultsmanagertester_testlogsuccess">Function TestResultsManagerTester  TestLogSuccess</a></li>
+				<li><a href="#function_testresultsmanagertester_testlogfailure">Function TestResultsManagerTester  TestLogFailure</a></li>
+				<li><a href="#function_testresultsmanagertester_testtestcase">Function TestResultsManagerTester  TestTestCase</a></li>
+				<li><a href="#function_testresultsmanagertester_testtestfixture">Function TestResultsManagerTester  TestTestFixture</a></li>
+				<li><a href="#function_testresultsmanagertester_testtestsuite">Function TestResultsManagerTester  TestTestSuite</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#testrunnertester">TestRunnerTester</a></li>
+		<ul>
+
+			<li><a href="#testrunnertester_macros">TestRunnerTester  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_testrunnertester_testrun">Function TestRunnerTester  TestRun</a></li>
+				<li><a href="#function_testrunnertester_testshouldrunfixture">Function TestRunnerTester  TestShouldRunFixture</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#dummytestmodule">DummyTestModule</a></li>
+		<ul>
+
+			<li><a href="#dummytestmodule_macros">DummyTestModule  Macros</a></li>
+		</ul>
+
+		<li><a href="#dummytestmodule2">DummyTestModule2</a></li>
+		<ul>
+
+			<li><a href="#dummytestmodule2_macros">DummyTestModule2  Macros</a></li>
+		</ul>
+
+		<li><a href="#dummytestmodule3">DummyTestModule3</a></li>
+		<ul>
+
+			<li><a href="#dummytestmodule3_macros">DummyTestModule3  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_dummytestmodule3_reset">Function DummyTestModule3  Reset</a></li>
+				<li><a href="#function_dummytestmodule3_callme">Function DummyTestModule3  CallMe</a></li>
+				<li><a href="#function_dummytestmodule3_test1">Function DummyTestModule3  Test1</a></li>
+				<li><a href="#function_dummytestmodule3_test2">Function DummyTestModule3  Test2</a></li>
+				<li><a href="#function_dummytestmodule3_setup">Function DummyTestModule3  SetUp</a></li>
+				<li><a href="#function_dummytestmodule3_teardown">Function DummyTestModule3  TearDown</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#dummytestmodule4">DummyTestModule4</a></li>
+		<ul>
+
+			<li><a href="#dummytestmodule4_macros">DummyTestModule4  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_dummytestmodule4_notatest">Function DummyTestModule4  NotATest</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#itestlogger">ITestLogger</a></li>
+		<ul>
+
+			<li><a href="#itestlogger_macros">ITestLogger  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_itestlogger_logmsg">Function ITestLogger  LogMsg</a></li>
+				<li><a href="#function_itestlogger_logsuccess">Function ITestLogger  LogSuccess</a></li>
+				<li><a href="#function_itestlogger_logfailure">Function ITestLogger  LogFailure</a></li>
+				<li><a href="#function_itestlogger_starttestfixture">Function ITestLogger  StartTestFixture</a></li>
+				<li><a href="#function_itestlogger_endtestfixture">Function ITestLogger  EndTestFixture</a></li>
+				<li><a href="#function_itestlogger_starttestcase">Function ITestLogger  StartTestCase</a></li>
+				<li><a href="#function_itestlogger_endtestcase">Function ITestLogger  EndTestCase</a></li>
+				<li><a href="#function_itestlogger_endtestsuite">Function ITestLogger  EndTestSuite</a></li>
+				<li><a href="#property_let_itestlogger_expectednumtestcases">Property Let ITestLogger  ExpectedNumTestCases</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#debugtestlogger">DebugTestLogger</a></li>
+		<ul>
+
+			<li><a href="#debugtestlogger_macros">DebugTestLogger  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_debugtestlogger_itestlogger_logmsg">Function DebugTestLogger  ITestLogger_LogMsg</a></li>
+				<li><a href="#function_debugtestlogger_itestlogger_logsuccess">Function DebugTestLogger  ITestLogger_LogSuccess</a></li>
+				<li><a href="#function_debugtestlogger_itestlogger_logfailure">Function DebugTestLogger  ITestLogger_LogFailure</a></li>
+				<li><a href="#function_debugtestlogger_itestlogger_starttestfixture">Function DebugTestLogger  ITestLogger_StartTestFixture</a></li>
+				<li><a href="#function_debugtestlogger_itestlogger_endtestfixture">Function DebugTestLogger  ITestLogger_EndTestFixture</a></li>
+				<li><a href="#function_debugtestlogger_itestlogger_endtestcase">Function DebugTestLogger  ITestLogger_EndTestCase</a></li>
+				<li><a href="#function_debugtestlogger_itestlogger_endtestsuite">Function DebugTestLogger  ITestLogger_EndTestSuite</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#fakedebugtestlogger">FakeDebugTestLogger</a></li>
+		<ul>
+
+			<li><a href="#fakedebugtestlogger_macros">FakeDebugTestLogger  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_fakedebugtestlogger_itestlogger_logmsg">Function FakeDebugTestLogger  ITestLogger_LogMsg</a></li>
+				<li><a href="#function_fakedebugtestlogger_itestlogger_logsuccess">Function FakeDebugTestLogger  ITestLogger_LogSuccess</a></li>
+				<li><a href="#function_fakedebugtestlogger_itestlogger_logfailure">Function FakeDebugTestLogger  ITestLogger_LogFailure</a></li>
+				<li><a href="#function_fakedebugtestlogger_itestlogger_starttestfixture">Function FakeDebugTestLogger  ITestLogger_StartTestFixture</a></li>
+				<li><a href="#function_fakedebugtestlogger_itestlogger_endtestfixture">Function FakeDebugTestLogger  ITestLogger_EndTestFixture</a></li>
+				<li><a href="#function_fakedebugtestlogger_itestlogger_endtestcase">Function FakeDebugTestLogger  ITestLogger_EndTestCase</a></li>
+				<li><a href="#function_fakedebugtestlogger_itestlogger_endtestsuite">Function FakeDebugTestLogger  ITestLogger_EndTestSuite</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#itestresultsmanager">ITestResultsManager</a></li>
+		<ul>
+
+			<li><a href="#itestresultsmanager_macros">ITestResultsManager  Macros</a></li>
+			<ul>
+
+				<li><a href="#property_set_itestresultsmanager_testlogger">Property Set ITestResultsManager  testLogger</a></li>
+				<li><a href="#property_get_itestresultsmanager_totalsuccesscount">Property Get ITestResultsManager  TotalSuccessCount</a></li>
+				<li><a href="#property_get_itestresultsmanager_totalfailurecount">Property Get ITestResultsManager  TotalFailureCount</a></li>
+				<li><a href="#property_get_itestresultsmanager_fixturesuccesscount">Property Get ITestResultsManager  FixtureSuccessCount</a></li>
+				<li><a href="#property_get_itestresultsmanager_fixturefailurecount">Property Get ITestResultsManager  FixtureFailureCount</a></li>
+				<li><a href="#property_get_itestresultsmanager_testcasesuccesscount">Property Get ITestResultsManager  TestCaseSuccessCount</a></li>
+				<li><a href="#property_get_itestresultsmanager_testcasefailurecount">Property Get ITestResultsManager  TestCaseFailureCount</a></li>
+				<li><a href="#function_itestresultsmanager_logsuccess">Function ITestResultsManager  LogSuccess</a></li>
+				<li><a href="#function_itestresultsmanager_logfailure">Function ITestResultsManager  LogFailure</a></li>
+				<li><a href="#function_itestresultsmanager_starttestfixture">Function ITestResultsManager  StartTestFixture</a></li>
+				<li><a href="#function_itestresultsmanager_endtestfixture">Function ITestResultsManager  EndTestFixture</a></li>
+				<li><a href="#function_itestresultsmanager_starttestcase">Function ITestResultsManager  StartTestCase</a></li>
+				<li><a href="#function_itestresultsmanager_endtestcase">Function ITestResultsManager  EndTestCase</a></li>
+				<li><a href="#function_itestresultsmanager_endtestsuite">Function ITestResultsManager  EndTestSuite</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#testresultsmanager">TestResultsManager</a></li>
+		<ul>
+
+			<li><a href="#testresultsmanager_macros">TestResultsManager  Macros</a></li>
+			<ul>
+
+				<li><a href="#sub_testresultsmanager_class_initialize">Sub TestResultsManager  Class_Initialize</a></li>
+				<li><a href="#property_set_testresultsmanager_itestresultsmanager_testlogger">Property Set TestResultsManager  ITestResultsManager_TestLogger</a></li>
+				<li><a href="#property_get_testresultsmanager_itestresultsmanager_totalsuccesscount">Property Get TestResultsManager  ITestResultsManager_TotalSuccessCount</a></li>
+				<li><a href="#property_get_testresultsmanager_itestresultsmanager_totalfailurecount">Property Get TestResultsManager  ITestResultsManager_TotalFailureCount</a></li>
+				<li><a href="#property_get_testresultsmanager_itestresultsmanager_fixturesuccesscount">Property Get TestResultsManager  ITestResultsManager_FixtureSuccessCount</a></li>
+				<li><a href="#property_get_testresultsmanager_itestresultsmanager_fixturefailurecount">Property Get TestResultsManager  ITestResultsManager_FixtureFailureCount</a></li>
+				<li><a href="#property_get_testresultsmanager_itestresultsmanager_testcasesuccesscount">Property Get TestResultsManager  ITestResultsManager_TestCaseSuccessCount</a></li>
+				<li><a href="#property_get_testresultsmanager_itestresultsmanager_testcasefailurecount">Property Get TestResultsManager  ITestResultsManager_TestCaseFailureCount</a></li>
+				<li><a href="#function_testresultsmanager_itestresultsmanager_logsuccess">Function TestResultsManager  ITestResultsManager_LogSuccess</a></li>
+				<li><a href="#function_testresultsmanager_itestresultsmanager_logfailure">Function TestResultsManager  ITestResultsManager_LogFailure</a></li>
+				<li><a href="#function_testresultsmanager_itestresultsmanager_starttestfixture">Function TestResultsManager  ITestResultsManager_StartTestFixture</a></li>
+				<li><a href="#function_testresultsmanager_itestresultsmanager_endtestfixture">Function TestResultsManager  ITestResultsManager_EndTestFixture</a></li>
+				<li><a href="#function_testresultsmanager_itestresultsmanager_starttestcase">Function TestResultsManager  ITestResultsManager_StartTestCase</a></li>
+				<li><a href="#function_testresultsmanager_itestresultsmanager_endtestcase">Function TestResultsManager  ITestResultsManager_EndTestCase</a></li>
+				<li><a href="#function_testresultsmanager_itestresultsmanager_endtestsuite">Function TestResultsManager  ITestResultsManager_EndTestSuite</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#faketestresultsmanager">FakeTestResultsManager</a></li>
+		<ul>
+
+			<li><a href="#faketestresultsmanager_macros">FakeTestResultsManager  Macros</a></li>
+			<ul>
+
+				<li><a href="#property_set_faketestresultsmanager_itestresultsmanager_testlogger">Property Set FakeTestResultsManager  ITestResultsManager_TestLogger</a></li>
+				<li><a href="#property_get_faketestresultsmanager_itestresultsmanager_totalsuccesscount">Property Get FakeTestResultsManager  ITestResultsManager_TotalSuccessCount</a></li>
+				<li><a href="#property_get_faketestresultsmanager_itestresultsmanager_totalfailurecount">Property Get FakeTestResultsManager  ITestResultsManager_TotalFailureCount</a></li>
+				<li><a href="#property_get_faketestresultsmanager_itestresultsmanager_fixturesuccesscount">Property Get FakeTestResultsManager  ITestResultsManager_FixtureSuccessCount</a></li>
+				<li><a href="#property_get_faketestresultsmanager_itestresultsmanager_fixturefailurecount">Property Get FakeTestResultsManager  ITestResultsManager_FixtureFailureCount</a></li>
+				<li><a href="#property_get_faketestresultsmanager_itestresultsmanager_testcasesuccesscount">Property Get FakeTestResultsManager  ITestResultsManager_TestCaseSuccessCount</a></li>
+				<li><a href="#property_get_faketestresultsmanager_itestresultsmanager_testcasefailurecount">Property Get FakeTestResultsManager  ITestResultsManager_TestCaseFailureCount</a></li>
+				<li><a href="#function_faketestresultsmanager_itestresultsmanager_logsuccess">Function FakeTestResultsManager  ITestResultsManager_LogSuccess</a></li>
+				<li><a href="#function_faketestresultsmanager_itestresultsmanager_logfailure">Function FakeTestResultsManager  ITestResultsManager_LogFailure</a></li>
+				<li><a href="#function_faketestresultsmanager_itestresultsmanager_starttestfixture">Function FakeTestResultsManager  ITestResultsManager_StartTestFixture</a></li>
+				<li><a href="#function_faketestresultsmanager_itestresultsmanager_endtestfixture">Function FakeTestResultsManager  ITestResultsManager_EndTestFixture</a></li>
+				<li><a href="#function_faketestresultsmanager_itestresultsmanager_starttestcase">Function FakeTestResultsManager  ITestResultsManager_StartTestCase</a></li>
+				<li><a href="#function_faketestresultsmanager_itestresultsmanager_endtestcase">Function FakeTestResultsManager  ITestResultsManager_EndTestCase</a></li>
+				<li><a href="#function_faketestresultsmanager_itestresultsmanager_endtestsuite">Function FakeTestResultsManager  ITestResultsManager_EndTestSuite</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#testfixture">TestFixture</a></li>
+		<ul>
+
+			<li><a href="#testfixture_macros">TestFixture  Macros</a></li>
+			<ul>
+
+				<li><a href="#property_get_testfixture_testprocedures">Property Get TestFixture  TestProcedures</a></li>
+				<li><a href="#property_get_testfixture_filename">Property Get TestFixture  FileName</a></li>
+				<li><a href="#property_get_testfixture_fixturename">Property Get TestFixture  fixtureName</a></li>
+				<li><a href="#property_get_testfixture_hassetupfunction">Property Get TestFixture  HasSetUpFunction</a></li>
+				<li><a href="#property_get_testfixture_hasteardownfunction">Property Get TestFixture  HasTearDownFunction</a></li>
+				<li><a href="#property_get_testfixture_hasfixturesetupfunction">Property Get TestFixture  HasFixtureSetUpFunction</a></li>
+				<li><a href="#property_get_testfixture_hasfixtureteardownfunction">Property Get TestFixture  HasFixtureTearDownFunction</a></li>
+				<li><a href="#function_testfixture_runtests">Function TestFixture  RunTests</a></li>
+				<li><a href="#function_testfixture_invokeproc">Function TestFixture  InvokeProc</a></li>
+				<li><a href="#function_testfixture_extracttestcases">Function TestFixture  ExtractTestCases</a></li>
+				<li><a href="#function_testfixture_doesmethodexist">Function TestFixture  DoesMethodExist</a></li>
+				<li><a href="#function_testfixture_extractfilename">Function TestFixture  ExtractFileName</a></li>
+				<li><a href="#function_testfixture_gettestmethods">Function TestFixture  GetTestMethods</a></li>
+				<li><a href="#function_testfixture_istestmethodline">Function TestFixture  IsTestMethodLine</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#testmanager">TestManager</a></li>
+		<ul>
+
+			<li><a href="#testmanager_macros">TestManager  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_testmanager_gettestfixtures">Function TestManager  GetTestFixtures</a></li>
+				<li><a href="#function_testmanager_gettestfixture">Function TestManager  GetTestFixture</a></li>
+				<li><a href="#function_testmanager_gettestingcomponents">Function TestManager  GetTestingComponents</a></li>
+				<li><a href="#function_gettestingcomponentscount">Function GetTestingComponentsCount</a></li>
+				<li><a href="#function_testmanager_istestcomponent">Function TestManager  IsTestComponent</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#testrunner">TestRunner</a></li>
+		<ul>
+
+			<li><a href="#testrunner_macros">TestRunner  Macros</a></li>
+			<ul>
+
+				<li><a href="#function_testrunner_run">Function TestRunner  Run</a></li>
+				<li><a href="#function_testrunner_shouldrunfixture">Function TestRunner  ShouldRunFixture</a></li>
+				<li><a href="#function_testrunner_gettestfixtures">Function TestRunner  GetTestFixtures</a></li>
+			</ul>
+
+		</ul>
+
+		<li><a href="#moderrortrap">modErrorTrap</a></li>
+		<ul>
+
+			<li><a href="#moderrortrap_macros">modErrorTrap  Macros</a></li>
+			<ul>
+
+				<li><a href="#sub_errtrap">Sub ErrTrap</a></li>
+			</ul>
+
+		</ul>
+
+	</ul>
+
+</ul>
+
+<hr name="index" />
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<hr />
+<h1><a name="introduction">Introduction</a></h1>
+<p>
+</p>
+<h2><a name="overview__by_mh_">Overview (by MH)</a></h2>
+<p>A unit test framework similar to nunit (<a href="http://www.nunit.org/">http://www.nunit.org/</a>) and
+junit (<a href="http://www.junit.org/">http://www.junit.org/</a>), but for Excel VBA code.
+It is similar to the existing VbaUnit project in sourceforge but:</p>
+<ol>
+<li><strong><a name="there_is_no_self_modifying_code_so_is_easier_to_write_tests_to_test_itself2" class="item">There is no self-modifying code, so is easier to write tests to test itself.</a></strong>
+
+</li>
+<li><strong><a name="tested" class="item">The code lives in an Excel addin so you do not need to copy the code into each
+project to be tested (obviously this makes it Excel specific).</a></strong>
+
+</li>
+<li><strong><a name="the_original_sourceforge_vbaunit_requires_you_to_call_a_prep_function_prior_to_running_your_tests_and_remembering_to_call_prep_when_you_add_remove_testing_functions_there_is_no_need_to_do_this_with_this_framework_just_call_xrun_to_execute_your_tests2" class="item">The original sourceforge VbaUnit requires you to call a Prep function prior to
+running your tests and remembering to call Prep when you add/remove testing functions. There
+is no need to do this with this framework - just call xRun to execute your tests.</a></strong>
+
+</li>
+</ol>
+<p>
+</p>
+<h2><a name="to_do">To do</a></h2>
+<ul>
+<li><strong><a name="make_use_of_apps_hungarian_notation_consistent_throughout2" class="item">Make use of Apps Hungarian notation consistent throughout.</a></strong>
+
+</li>
+<li><strong><a name="change_coverage_analysis_to_cope_with_multiple_implementations_of_class_modules2" class="item">Change coverage analysis to cope with multiple implementations of class modules.</a></strong>
+
+</li>
+<li><strong><a name="formulae" class="item">Write documentation on how to test worksheet formulae (including TDD).</a></strong>
+
+</li>
+<li><strong><a name="write_a_gui2" class="item">Write a GUI.</a></strong>
+
+</li>
+<li><strong><a name="sheet" class="item">Change the ErrorTrap constants back to their usual status as variables, including
+the options either on the GUI or on a sheet (usually very hidden). This will enable
+unattended, automated testing that can detect errors from the log file.</a></strong>
+
+</li>
+<li><strong><a name="add_class_modules_to_enable_test_results_to_be_logged_to_a_file_as_another_necessity_for_unattended_automated_testing2" class="item">Add class modules to enable test results to be logged to a file as another necessity
+for unattended automated testing.</a></strong>
+
+</li>
+</ul>
+<p>
+</p>
+<h2><a name="change_log">Change Log</a></h2>
+<p>
+</p>
+<h3><a name="changes_from_version_r13">Changes from version r13</a></h3>
+<ul>
+<li><strong><a name="wrote_documentation_in_excelpod2" class="item">Wrote documentation in ExcelPOD.</a></strong>
+
+</li>
+<li><strong><a name="added_comprehensive_error_trapping2" class="item">Added comprehensive error trapping.</a></strong>
+
+</li>
+<li><strong><a name="refactored_certain_procedures_to_avoid_looping_twice_by_using_redim_preserve_certain_other_procedures_were_refactored_out_in_consequence_as_they_were_no_longer_useful2" class="item">Refactored certain procedures to avoid looping twice by using ReDim Preserve.
+Certain other procedures were refactored out in consequence as they were no longer useful.</a></strong>
+
+</li>
+<li><strong><a name="2" class="item">Fixed issue 2 (<a href="http://code.google.com/p/excelvbaunit/issues/detail?id=2">http://code.google.com/p/excelvbaunit/issues/detail</a>)
+to allow test modules with no tests. This is important because users may already have
+modules called *Tester to test for other things. These would automatically be treated by
+xRun as modules expected to contain tests. It also allows projects without test modules.</a></strong>
+
+</li>
+<li><strong><a name="1" class="item">Fixed issue 1 (<a href="http://code.google.com/p/excelvbaunit/issues/detail?id=1">http://code.google.com/p/excelvbaunit/issues/detail</a>). This
+now produces a messagebox if the project can't be found.</a></strong>
+
+</li>
+<li><strong><a name="fixed_a_bug_in_testrunnertester_that_caused_it_to_report_zero_failures_and_zero_successes_not_only_for_itself_but_for_all_test_modules_run_subsequently2" class="item">Fixed a bug in TestRunnerTester that caused it to report zero failures and zero
+successes, not only for itself but for all test modules run subsequently.</a></strong>
+
+</li>
+<li><strong><a name="changed_restrictions_on_subs_that_contain_tests_to_allow_functions_and_subs_that_are_not_explicitly_declared_as_public_but_still_excluding_private_and_friend2" class="item">Changed restrictions on subs that contain tests to allow functions and subs that
+are not explicitly declared as Public, but still excluding Private and Friend.</a></strong>
+
+</li>
+<li><strong><a name="added_a_retrofitter_to_create_a_new_tester_module_and_test_stubs_for_any_module_that_does_not_already_have_one2" class="item">Added a retrofitter to create a new Tester module and Test stubs for any module
+that does not already have one.</a></strong>
+
+</li>
+<li><strong><a name="added_a_coverage_analyst2" class="item">Added a coverage analyst.</a></strong>
+
+</li>
+<li><strong><a name="warns_when_testing_if_there_is_a_setup_procedure_but_no_teardown2" class="item">Warns when testing if there is a SetUp procedure but no TearDown.</a></strong>
+
+</li>
+<li><strong><a name="refactored_tests_that_look_for_modules_in_specific_orders_to_take_them_in_any_order2" class="item">Refactored tests that look for modules in specific orders to take them in any order.</a></strong>
+
+</li>
+<li><strong><a name="changed_assertequal_to_cope_with_floating_point_differences2" class="item">Changed AssertEqual to cope with floating point differences.</a></strong>
+
+</li>
+<li><strong><a name="retrofitted_tests_to_most_of_the_procedures_in_assert2" class="item">Retrofitted tests to most of the procedures in Assert.</a></strong>
+
+</li>
+<li><strong><a name="changed_tests_for_modules_so_that_excel_did_not_need_to_store_them_in_any_specific_order2" class="item">Changed tests for modules so that Excel did not need to store them in any specific
+order.</a></strong>
+
+</li>
+<li><strong><a name="retrofitted_a_new_maintester_as_the_one_needed_by_the_tests_was_not_in_the_repository2" class="item">Retrofitted a new MainTester as the one needed by the tests was not in the
+repository.</a></strong>
+
+</li>
+</ul>
+<p>
+</p>
+<h3><a name="changes_in_previous_versions">Changes in previous versions</a></h3>
+<p>See <a href="http://code.google.com/p/excelvbaunit/">http://code.google.com/p/excelvbaunit/</a>.</p>
+<p>
+</p>
+<h2><a name="authors">Authors</a></h2>
+<p>The original author (and writer of most of the code) was Matt Helliwell (MH). The error
+trapping, coverage and retrofit code and most of the documentation were written by John
+Davies (JHD).</p>
+<p>
+</p>
+<h2><a name="copyright">Copyright</a></h2>
+<p><a href="http://www.gnu.org/licenses/lgpl.html">http://www.gnu.org/licenses/lgpl.html</a></p>
+<p>
+</p>
+<hr />
+<h1><a name="technical_documentation">Technical Documentation</a></h1>
+<p><code>Option Private Module</code>, while generally recommended, has not been used as the add-in
+needs to be accessible to modules in other files. It <em>has</em> been used in &quot;*Tester&quot; and
+&quot;Dummy*&quot; modules that should not be used by other files. It cannot be used in class
+modules.</p>
+<p>
+</p>
+<h2><a name="hints_for_developers">Hints for Developers</a></h2>
+<p>Before starting development, type <code>xrun</code> in the Immediate pane. This will run all
+tests currently in the system. It makes sense to note the number of tests at the end of
+the run. Then, whenever you make a change, <em>no matter how slight</em>, run all the tests and
+check that everything passes. If you make changes that break something else, you will
+find that out as early as possible and be able to backtrack or compensate depending on
+what the situation requires.</p>
+<p>
+</p>
+<h2><a name="named_ranges">Named Ranges</a></h2>
+<p>There are no named ranges in the add-in.</p>
+<p>
+</p>
+<h2><a name="modpod">modPOD</a></h2>
+<p>This module contains nothing but POD.</p>
+<p>
+</p>
+<h2><a name="sheet1">Sheet1</a></h2>
+<p>This sheet exists because Excel cannot accept a file with no sheets. The sheet is hidden
+and unused.</p>
+<p>
+</p>
+<h2><a name="thisworkbook">ThisWorkbook</a></h2>
+<p>This object is defined and required by Excel. It is not used by the system.</p>
+<p>
+</p>
+<h2><a name="assert">Assert</a></h2>
+<p>This code module contains subs that determine whether tests have passed or failed. It also
+contains a test result manager object and a sub to create an instance of it.</p>
+<p>
+</p>
+<h3><a name="assert_macros">Assert  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_assert_settestresultsmanager">Function Assert  SetTestResultsManager</a></h4>
+<p>SetTestResultsManager(manager As ITestResultsManager) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Creates an instance of the manager using a module level variable.</p>
+<p>
+</p>
+<h4><a name="function_assert_asserttrue">Function Assert  AssertTrue</a></h4>
+<p>AssertTrue(test As Boolean, Optional msg As String = &quot;&quot;) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Accepts a boolean which will be true if the test has passed. Logs the result via the
+test result manager.</p>
+<p>
+</p>
+<h4><a name="function_assert_assertfalse">Function Assert  AssertFalse</a></h4>
+<p>AssertFalse(test As Boolean, Optional msg As String = &quot;&quot;) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Accepts a boolean which will be false if the test has passed. Logs the result via the
+test result manager.</p>
+<p>
+</p>
+<h4><a name="function_assert_assertequal">Function Assert  AssertEqual</a></h4>
+<p>AssertEqual(expected As Variant, actual As Variant, Optional msg As String = &quot;&quot;) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Accepts two values that will be equal if the test has passed. In the case of floating point
+numbers, &quot;Equal&quot; is taken to mean that the ratio of the two is 1 if rounded to five decimal
+places. If this is not suitable for your application, you may need to write your own, more
+accurate test and use <a href="#function_assert_assertsuccess">AssertSuccess</a> and
+<a href="#function_assert_assertfailure">AssertFailure</a> to get the results you need. In this
+situation, you should know enough about floating point accuracy issues at least to find out
+more on them using a search engine. They are widely documented.</p>
+<p>
+</p>
+<h4><a name="function_assert_assertsuccess">Function Assert  AssertSuccess</a></h4>
+<p>Returns True if an error occurs.</p>
+<p>This function takes no parameters. It can be used if the previous &quot;Assert&quot; tests do not
+provide the needed functionality when a test has met the user's definition of success.</p>
+<p>
+</p>
+<h4><a name="function_assert_assertfailure">Function Assert  AssertFailure</a></h4>
+<p>AssertFailure(Optional msg As String = &quot;&quot;) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>This is the converse of AssertSuccess.</p>
+<p>
+</p>
+<h4><a name="function_assert_backuptrm">Function Assert  BackupTRM</a></h4>
+<p><code>BackupTRM()</code> As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Creates a backup of the Test Result Manager. This is needed in self-testing, when testing
+the TRM handling procedures themselves. The &quot;real&quot; TRM needs to be overwritten to enable
+a fake one to be used for testing. However, the results of testing the fake need to be
+logged to the real TRM, otherwise the system reports zero passes and zero failures,
+regardless of the actual results. The backup is stored in a module level variable.</p>
+<p>
+</p>
+<h4><a name="function_assert_restoretrm">Function Assert  RestoreTRM</a></h4>
+<p><code>RestoreTRM()</code> As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Reverses the polarity of the neutron flow^W^W^W BackupTRM above.</p>
+<p>
+</p>
+<h2><a name="asserttester">AssertTester</a></h2>
+<p>Retrofitted by JHD to test Assert commands. Three procedures - SetTestResultsManager,
+BackupTRM and RestoreTRM - are not tested, as no obvious means can be seen to do this.
+Other procedures are tested, but because of the nature of the procedures being tested, the
+number of tests is under-reported. This is because two test managers are needed. It is
+necessary to test that assert procedures process failures correctly. Therefore a second
+test manager is used to record how many passes and failures there are. These counts are
+then passed to the testing procedure which uses the main TRM to test that the counts are as
+expected. Thus, in the case of AssertEqual, there are four tests for failure and four for
+success. But the main TRM is only asked to check that both these numbers are 4, meaning
+that the total of eight tests looks as though there are only two. There will also be reports
+of failures in the log. These have been annotated as intentional failures, but may look
+strange at first sight.</p>
+<p>
+</p>
+<h3><a name="asserttester_macros">AssertTester  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_testasserttrue">Function TestAssertTrue</a></h4>
+<p>2 tests reported as 2.</p>
+<p>
+</p>
+<h4><a name="function_testassertfalse">Function TestAssertFalse</a></h4>
+<p>2 tests reported as 2.</p>
+<p>
+</p>
+<h4><a name="function_testassertequal">Function TestAssertEqual</a></h4>
+<p>8 tests reported as 2.</p>
+<p>
+</p>
+<h4><a name="function_testassertsuccess">Function TestAssertSuccess</a></h4>
+<p>1 test.</p>
+<p>
+</p>
+<h4><a name="function_testassertfailure">Function TestAssertFailure</a></h4>
+<p>1 test.</p>
+<p>
+</p>
+<h2><a name="export">Export</a></h2>
+<p>This standard code module contains procedures to delete all code modules from an add-in
+named AddInName, i.e. itself. It is unlikely to be useful to many people. It is not
+tested by the self-testing process since it deletes the code that would be tested and
+does the testing.</p>
+<p>
+</p>
+<h3><a name="export_macros">Export  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_export_exportallcode">Function Export  ExportAllCode</a></h4>
+<p>ExportAllCode(dir As String, Optional projectName As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Originally, this was called by ExportThisCode, which has now been deleted. It has been
+refactored by means of the AddInName variable to enable both its original purpose (to
+export code from any named project) and the purpose of ExportThisCode (to export the
+add-in). If a project is supplied, it is exported. If not, the add-in is exported. A
+directory, to which the code will be exported, must be specified.</p>
+<p>
+</p>
+<h4><a name="function_export_deleteallcode">Function Export  DeleteAllCode</a></h4>
+<p>DeleteAllCode(Optional projectName As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>This procedure has been refactored to take the add-in name from the initialisation routine
+if it is missing. It must be called from the Immediate pane and will check before it
+deletes code. God speed, brave programmer. I hope you backed everything up before you
+mistyped or forgot the project name.</p>
+<p>
+</p>
+<h4><a name="function_export_getcodemodules">Function Export  GetCodeModules</a></h4>
+<p>GetCodeModules(components As VBComponents) As <code>VBComponent()</code></p>
+<p>Returns an array of code modules from the components collection passed.</p>
+<p>
+</p>
+<h4><a name="function_export_getexportfilename">Function Export  GetExportFileName</a></h4>
+<p>GetExportFileName(dir As String, comp As VBComponent) As String</p>
+<p>Takes a directory and a component and returns the fully qualified file name with the
+necessary suffix.</p>
+<p>
+</p>
+<h4><a name="function_export_getexportfilenamesuffix">Function Export  GetExportFileNameSuffix</a></h4>
+<p>GetExportFileNameSuffix(c As VBComponent) As String</p>
+<p>Given a component, returns a suffix (or conceivably three question marks if no definitive
+suffix is available).</p>
+<p>
+</p>
+<h4><a name="function_export_iscodemodule">Function Export  IsCodeModule</a></h4>
+<p>Given a component, returns a boolean indicating whether it is a code module.</p>
+<p>
+</p>
+<h2><a name="modretrofit">modRetroFit</a></h2>
+<p>This code module contains procedures to add a fixture (code module) to match an existing
+code module and to populate the fixture with stub functions to test every existing
+sub or function in the given module. This module's main function cannot
+be tested, but it should be possible to test many of the routines it calls.</p>
+<p>
+</p>
+<h3><a name="modretrofit_macros">modRetroFit  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_modretrofit_retrofit">Function modRetroFit  RetroFit</a></h4>
+<p>RetroFit(sMod As String, Optional bFn As Boolean = True,
+Optional bAddErrTrap As Boolean = True, Optional bPOD As Boolean = True) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>This function is called from the Immediate pane. Given a string parameter of the name of a
+module, it will create a new module to test it. The name should be in the fully qualified
+form of project.module. If the project is omitted, the add-in itself will be assumed.
+There are three optional boolean parameters. The first indicates whether functions are
+to be used. This defaults to True, but some users may prefer subs. The second indicates
+whether an error trap is to be added. Again, this defaults to True. The last indicates
+whether POD is to be added. Obviously, this is the framework only, but if it is True
+(again, this is the default), the framework will be added both to the top of the new
+module and to the top of each generated procedure stub.</p>
+<p>
+</p>
+<h4><a name="function_modretrofit_correctmod">Function modRetroFit  CorrectMod</a></h4>
+<p>CorrectMod(ByRef sMod As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Given a module name, tests it for a project name. If no project name is found, prepends
+the name of the add-in.</p>
+<p>
+</p>
+<h4><a name="function_modretrofit_projfound">Function modRetroFit  ProjFound</a></h4>
+<p>ProjFound(sMod As String, prj As VBProject) As Boolean</p>
+<p>Given a qualified module name, tests whether the project (the qualifier) can be found.
+True indicates the project has been found. The prj variable will be set to the project.</p>
+<p>
+</p>
+<h4><a name="function_modretrofit_modfound">Function modRetroFit  ModFound</a></h4>
+<p>ModFound(ByVal sMod As String, prj As VBProject, mdl As VBComponent) As Boolean</p>
+<p>Returns True if the module is found in the project. Also sets the third parameter to the
+module.</p>
+<p>
+</p>
+<h4><a name="function_modretrofit_addstubs">Function modRetroFit  AddStubs</a></h4>
+<p>AddStubs(mdl As VBComponent, mdlTester As VBComponent, Optional bFn As Boolean = True,
+Optional bAddErrTrap As Boolean = True, Optional bPOD As Boolean = True) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Adds the stubs to the Tester module based on the source module.</p>
+<p>
+</p>
+<h4><a name="function_modretrofit_addpodhead">Function modRetroFit  AddPODHead</a></h4>
+<p>AddPODHead(mdl As VBComponent) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Adds POD to the head of a module.</p>
+<p>
+</p>
+<h4><a name="function_modretrofit_addpodproc">Function modRetroFit  AddPODProc</a></h4>
+<p>AddPODProc(mdl As VBComponent, sProc As String, sName As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Adds POD to a procedure.</p>
+<p>
+</p>
+<h4><a name="function_modretrofit_instrap">Function modRetroFit  InsTrap</a></h4>
+<p>InsTrap(mdl As VBComponent, sProc As String, sName As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Adds an error trap to a sub or function.</p>
+<p>
+</p>
+<h2><a name="modretrofittester">modRetroFitTester</a></h2>
+<p>7 out of 8 routines tested.</p>
+<p>
+</p>
+<h3><a name="modretrofittester_macros">modRetroFitTester  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_testcorrectmod">Function TestCorrectMod</a></h4>
+<p>3 tests.</p>
+<p>
+</p>
+<h4><a name="function_testprojfound">Function TestProjFound</a></h4>
+<p>3 tests.</p>
+<p>
+</p>
+<h4><a name="function_testmodfound">Function TestModFound</a></h4>
+<p>2 tests.</p>
+<p>
+</p>
+<h4><a name="function_testaddstubs">Function TestAddStubs</a></h4>
+<p>1 test.</p>
+<p>
+</p>
+<h4><a name="function_testaddpodhead">Function TestAddPODHead</a></h4>
+<p>1 test.</p>
+<p>
+</p>
+<h4><a name="function_testaddpodproc">Function TestAddPODProc</a></h4>
+<p>1 test.</p>
+<p>
+</p>
+<h4><a name="function_testinstrap">Function TestInsTrap</a></h4>
+<p>1 test.</p>
+<p>
+</p>
+<h4><a name="function_setup">Function SetUp</a></h4>
+<p>Creates a new module to which data will be added.</p>
+<p>
+</p>
+<h4><a name="function_teardown">Function TearDown</a></h4>
+<p>Deletes the module created by SetUp.</p>
+<p>
+</p>
+<h2><a name="modcoverage">modCoverage</a></h2>
+<p>This standard code module contains code to calculate the coverage of tests in all modules
+that have a related tester module. Modules that have no such tester module are ignored,
+as the statistics may be useless. Examples from this add-in are the groups of class modules
+where three modules are linked, two providing implementations of the third. While it would
+be possible to calculate the coverage of the test module against its intended target,
+suggesting that coverage of the other two modules is zero would be pointless and misleading.
+Similarly, the DummyTestModules should not be tested. They are used for another purpose.</p>
+<p>
+</p>
+<h3><a name="modcoverage_macros">modCoverage  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_modcoverage_setuparrays">Function modCoverage  SetUpArrays</a></h4>
+<p><code>SetUpArrays()</code> As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Populates the gAllCalls array.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_inarray">Function modCoverage  InArray</a></h4>
+<p>InArray(ByVal val As Variant, arr As Variant, Optional bTrunc As Boolean = False) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Given a value and an array (a variant), returns True if the value is in the array. An
+optional boolean can be passed indicating that strings should be truncated to the length
+of the array elements. If False (the default), strings of different lengths will not match.
+The boolean will be ignored unless the value is a string.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_extractmods">Function modCoverage  ExtractMods</a></h4>
+<p>ExtractMods(prj As VBProject) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Populates gMods with all current module names.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_matchmods">Function modCoverage  MatchMods</a></h4>
+<p>MatchMods(sTester As String) As String</p>
+<p>Returns True if an error occurs.</p>
+<p>Given a string purporting to be the name of a tester module, returns the equivalent
+live module. Returns an empty string if the argument is not in the right form or the
+live equivalent does not exist.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_gettesters">Function modCoverage  GetTesters</a></h4>
+<p><code>GetTesters()</code> As <code>String()</code></p>
+<p>Returns True if an error occurs.</p>
+<p>This accepts no parameters, but expects gMods to contain an array of module names. The
+function iterates through this, returning the names of any modules that end with the
+test module suffix constant.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_getprocs">Function modCoverage  GetProcs</a></h4>
+<p>GetProcs(prj As VBProject, sMod As String, <code>sProcs()</code> As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Given a project and the name of a module, returns an array of strings (the last parameter)
+containing all procedures in the array.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_procnames">Function modCoverage  ProcNames</a></h4>
+<p>ProcNames(ByRef <code>sProcs()</code> As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Takes an array of strings of lines containing procedure names and strips them down to the
+bare procedure names.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_maponename">Function modCoverage  MapOneName</a></h4>
+<p>MapOneName(ByVal sProc As String, <code>sLive()</code> As String, <code>sTest()</code> As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Takes a string representing a procedure name and two arrays of procedure names. If the
+string exists in the first array and, preceded by ksTestModulePrefix, in the second array,
+it is deleted from both.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_startcoverall">Function modCoverage  StartCoverAll</a></h4>
+<p><code>StartCoverAll()</code> As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Sets grand total variables to zero.
+This uses module level variables. These cannot be seen outside the module, making its actions untestable. Maintenance programmers planning anything more sophisticated than is currently here are advised to put the code in another procedure that can be tested.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_startcovermod">Function modCoverage  StartCoverMod</a></h4>
+<p><code>StartCoverMod()</code> As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Sets module totals to zero.
+This uses module level variables. These cannot be seen outside the module, making its actions untestable. Maintenance programmers planning anything more sophisticated than is currently here are advised to put the code in another procedure that can be tested.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_endcovermod">Function modCoverage  EndCoverMod</a></h4>
+<p>EndCoverMod(sMod As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Takes a module name as a string argument. Increments totals and prints module results.
+This uses module level variables. These cannot be seen outside the module, making its actions untestable. Maintenance programmers planning anything more sophisticated than is currently here are advised to put the code in another procedure that can be tested.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_endcoverall">Function modCoverage  EndCoverAll</a></h4>
+<p><code>EndCoverAll()</code> As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Prints total results.
+This uses module level variables. These cannot be seen outside the module, making its actions untestable. Maintenance programmers planning anything more sophisticated than is currently here are advised to put the code in another procedure that can be tested.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_stripsetup">Function modCoverage  StripSetUp</a></h4>
+<p>StripSetUp(sProcs() As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Removes not only SetUp but also TearDown and their fixture equivalents (see
+<a href="#function_testfixture_runtests">here</a>) from an array of strings containing procedure names.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_coverage">Function modCoverage  Coverage</a></h4>
+<p>Coverage(Optional sPrj As String, Optional sMod As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Takes two optional string parameters. The first is the name of the project, assumed to
+be the add-in if empty. The second is the name of the module to be analysed. If no
+module is specified, every module in the project that has a &quot;Tester&quot; module will be
+analysed. To run this, type <code>coverage [project][,module]</code> in the immediate pane.</p>
+<p>This procedure is not tested.</p>
+<p>The coverage analysis will return three statistics for each pair of modules. These are
+&quot;tested&quot;, &quot;untested&quot; and &quot;unmatched&quot;. The &quot;tested&quot; statistic gives the number of procedures
+(always excluding Property* procedures in class modules) that have a matching Test
+procedure. The match is independent of the procedure type, so a &quot;Friend Sub&quot;'s matching
+test can be a Function. The &quot;untested&quot; statistic is the number of procedures in the live
+module that have no direct equivalent in the test module. The &quot;unmatched&quot; statistic is the
+number of procedures in the test module that have no equivalent in the live module.</p>
+<p>These statistics should not be used blindly. They are merely a test of procedure names, not
+of the quantity or quality of the tests in testing procedures. Simply running RetroFit
+will create statistics implying 100% coverage, even though no tests have been written.
+Conversely, class modules that implement other class modules will result in statistics
+suggesting that nothing is tested. This is because the procedure names in the implementing
+class module will have names that point to the implemented class module, while the testing
+module will not have the name of the implemented class module in the name of the
+procedure. It is conceivable that this will be circumvented in a later version.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_mapnames">Function modCoverage  MapNames</a></h4>
+<p>MapNames(sLive() As String, <code>sTest()</code> As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Takes two arrays of strings and strips out those that have test equivalents.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_pop">Function modCoverage  Pop</a></h4>
+<p>Pop(ary As Variant) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Takes an array and strips the last element. Note that this works only for single dimension
+arrays.</p>
+<p>
+</p>
+<h4><a name="function_modcoverage_coversingle">Function modCoverage  CoverSingle</a></h4>
+<p>CoverSingle(prj As VBProject, sMod As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Calculates coverage statistics for a single module.</p>
+<p>
+</p>
+<h2><a name="modcoveragetester">modCoverageTester</a></h2>
+<p>
+</p>
+<h3><a name="modcoveragetester_macros">modCoverageTester  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_modcoveragetester_testsetuparrays">Function modCoverageTester  TestSetUpArrays</a></h4>
+<p>8 tests that arrays are properly populated.</p>
+<p>
+</p>
+<h4><a name="function_modcoveragetester_testinarray">Function modCoverageTester  TestInArray</a></h4>
+<p>3 tests, 1 that arrays are properly populated, 1 that InArray returns false on a mismatch,
+1 that InArray can handle an empty array.</p>
+<p>
+</p>
+<h4><a name="function_modcoveragetester_testextractmods">Function modCoverageTester  TestExtractMods</a></h4>
+<p>3 tests, clearing and populating.</p>
+<p>
+</p>
+<h4><a name="function_modcoveragetester_testmatchmods">Function modCoverageTester  TestMatchMods</a></h4>
+<p>3 tests, 1 for this module and its live equivalent, 1 for an imaginary module and 1 for a
+non-tester module.</p>
+<p>
+</p>
+<h4><a name="function_modcoveragetester_testgettesters">Function modCoverageTester  TestGetTesters</a></h4>
+<p>3 tests for presence of this module and absence of other modules.</p>
+<p>
+</p>
+<h4><a name="function_modcoveragetester_testgetprocs">Function modCoverageTester  TestGetProcs</a></h4>
+<p>2 tests:</p>
+<ol>
+<li><strong><a name="this_module_has_some_procedures" class="item">) This module has some procedures.</a></strong>
+
+</li>
+<li><strong><a name="dummytestmodule_has_7" class="item">) DummyTestModule has 7.</a></strong>
+
+</li>
+</ol>
+<p>
+</p>
+<h4><a name="function_modcoveragetester_testprocnames">Function modCoverageTester  TestProcNames</a></h4>
+<p>Unknown number of tests. Depends on code path, number of procedures etc.</p>
+<p>
+</p>
+<h4><a name="function_modcoveragetester_testmapnames">Function modCoverageTester  TestMapNames</a></h4>
+<p>1 test that this module is totally matched.</p>
+<p>
+</p>
+<h4><a name="function_modcoveragetester_testmaponename">Function modCoverageTester  TestMapOneName</a></h4>
+<p>2 tests, one on each array included in a match.</p>
+<p>
+</p>
+<h4><a name="function_modcoveragetester_teststripsetup">Function modCoverageTester  TestStripSetUp</a></h4>
+<p>3 tests. 1 test ensures something is deleted by StripSetUp. 1 ensures that StripSetUp can
+accept an empty array. 1 ensures that StripSetUp can cope with emptying an array.</p>
+<p>
+</p>
+<h4><a name="function_modcoveragetester_testpop">Function modCoverageTester  TestPop</a></h4>
+<p>2 tests, one to make sure that an array is reduced, one to make sure a zero length array
+can be handled. Note that this works only with single dimension arrays.</p>
+<p>
+</p>
+<h2><a name="main">Main</a></h2>
+<p>This code module contains the core code of the system, including xRun, the procedure that
+should be invoked from the Immediate pane to run tests.</p>
+<p>
+</p>
+<h3><a name="main_macros">Main  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_main_xrun">Function Main  xRun</a></h4>
+<p>xRun(Optional projectName As String = Empty, Optional fixtureNameToBeRun As String = Empty,
+Optional testLogger As ITestLogger) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>This runs all tests in a project, unless the user specifies otherwise. The name of the
+project is the first (previously compulsory) parameter, which defaults to the name of the
+add-in. There are two further optional parameters. The first is the &quot;Fixture&quot; name - the
+name of a single module containing tests. If this is used, only that module's tests will
+be run. The last parameter is the logger. This is unlikely to be wanted except when testing
+this project itself.</p>
+<p>
+</p>
+<h4><a name="function_main_gettestmanager">Function Main  GetTestManager</a></h4>
+<p>Original documentation by MH:
+Factory function so can use test manager functions outside the add in. As the class is
+stateless, it doesn't matter that we return a new instance with this call.</p>
+<p>JHD: Unfortunately, this doesn't work. In the absence of the original MainTester, a new
+version has been written, but nothing seems to persuade it to return a test manager or do
+anything except raise an error in the calling procedure. It has therefore been commented out.</p>
+<p>
+</p>
+<h4><a name="function_main_safeubound">Function Main  SafeUbound</a></h4>
+<p>SafeUbound(var As Variant) As Long</p>
+<p>Accepts a variant, which is expected to be an array. Returns the upper bound of the array,
+or if there is an error, returns -1.</p>
+<p>
+</p>
+<h4><a name="function_main_getnames">Function Main  GetNames</a></h4>
+<p><code>GetNames()</code> As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Populates name variables.</p>
+<p>
+</p>
+<h4><a name="function_main_dudproj">Function Main  DudProj</a></h4>
+<p>DudProj(prjName As String, prj As VBProject) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Traps any reference to a dud project, creating the reference if it's OK.</p>
+<p>
+</p>
+<h2><a name="maintester">MainTester</a></h2>
+<p>This is a retrofitted module to test Main. The code implies that one was created as part
+of someone's development, but it was not on the Google source repository. The main
+procedure, &quot;xRun&quot;, cannot be tested.</p>
+<p>
+</p>
+<h3><a name="maintester_macros">MainTester  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_maintester_testgettestmanager">Function MainTester  TestGetTestManager</a></h4>
+<p>Everything JHD has tried has raised errors. Both the test routine - so far as it has been
+written - and the procedure in Main have been commented out.</p>
+<p>
+</p>
+<h4><a name="function_maintester_testsafeubound">Function MainTester  TestSafeUbound</a></h4>
+<p>4 tests on 2 arrays and 2 scalars.</p>
+<p>
+</p>
+<h4><a name="function_maintester_testgetnames">Function MainTester  TestGetNames</a></h4>
+<p>4 tests to set and reset the names.</p>
+<p>
+</p>
+<h2><a name="testfixturetester">TestFixtureTester</a></h2>
+<p>This is part of the test suite for the test harness add-in. Its primary purpose is to test
+the functionality of the &quot;TestFixture&quot; class module.</p>
+<p>
+</p>
+<h3><a name="testfixturetester_macros">TestFixtureTester  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_testfixturetester_testinvokeproc">Function TestFixtureTester  TestInvokeProc</a></h4>
+<p>Uses DummyTestModule3 to test that the macros in a test module were indeed called and that
+the right functions were called.</p>
+<p>
+</p>
+<h4><a name="function_testfixturetester_testruntests">Function TestFixtureTester  TestRunTests</a></h4>
+<p>Uses DummyTestModule3 to test that the Setup, TearDown and Test procedures are called and
+that others that are not tests are not called.</p>
+<p>
+</p>
+<h4><a name="function_testfixturetester_testdoesmethodexist">Function TestFixtureTester  TestDoesMethodExist</a></h4>
+<p>Uses DummyTestModule to test for the presence and absence of various procedures.</p>
+<p>
+</p>
+<h4><a name="function_testfixturetester_testextracttestcases">Function TestFixtureTester  TestExtractTestCases</a></h4>
+<p>Uses DummyTestModule to test that the ExtractTestCases code returns the correct number and
+names of test routines.</p>
+<p>
+</p>
+<h4><a name="function_testfixturetester_testextractsetupteardown">Function TestFixtureTester  TestExtractSetUpTearDown</a></h4>
+<p>Original documentation per MH: Tests for checking test case and test fixture level
+set up/tear down functions.</p>
+<p>JHD: This procedure does not have a single direct equivalent in TestFixture. It is used to
+test several of the Property Let / Get procedures that cannot be tested by their own
+test procedures. This will therefore be reported as unmatched by the coverage analysis.</p>
+<p>
+</p>
+<h4><a name="function_testfixturetester_testextractfilename">Function TestFixtureTester  TestExtractFileName</a></h4>
+<p>Tests the &quot;ExtractFileName&quot; code with various formats of file name, including and excluding
+paths and extensions.</p>
+<p>
+</p>
+<h4><a name="function_testfixturetester_testistestmethodline">Function TestFixtureTester  TestIsTestMethodLine</a></h4>
+<p>Tests the &quot;IsTestMethodLine&quot; function with three pseudo-lines of code.</p>
+<p>
+</p>
+<h4><a name="function_testfixturetester_testgettestmethods">Function TestFixtureTester  TestGetTestMethods</a></h4>
+<p>Tests the GetTestMethods function using DummyTestModule. The correct names and numbers of
+procedures should be returned. Refactored to take account of changes to the system.</p>
+<p>
+</p>
+<h2><a name="testmanagertester">TestManagerTester</a></h2>
+<p>This is part of the test suite for the test harness add-in. Its primary purpose is to test
+the functionality of the &quot;TestManager&quot; class module.</p>
+<p>
+</p>
+<h3><a name="testmanagertester_macros">TestManagerTester  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_testmanagertester_testistestcomponent">Function TestManagerTester  TestIsTestComponent</a></h4>
+<p>Checks the &quot;IsTestComponent&quot; function with three components.</p>
+<p>
+</p>
+<h4><a name="function_testmanagertester_testgettestingcomponentscount">Function TestManagerTester  TestGetTestingComponentsCount</a></h4>
+<p>Tests the GetTestingComponentsCount. There should be five components of the test suite,
+excluding the dummies but including MainTester, which has not been found on the Google
+repository. If more modules are added, the expected value of the test will have to be
+changed.</p>
+<p>
+</p>
+<h4><a name="function_testmanagertester_testgettestingcomponents">Function TestManagerTester  TestGetTestingComponents</a></h4>
+<p>Tests the &quot;GetTestingComponents&quot; function to ensure that all test modules' names are
+returned. This will need changing if additional test models are added.
+There is an issue. The tests assume the modules will be returned in a specific order. Since MainTester did not exist when the original add-in was assembled, it appears last in the list instead of first as the original tests assumed. Anyone assembling (rather than downloading complete) their own add-in may face the same issue. Changing the numbers to match the actual order is a perfectly acceptable way of getting around the problem. An enhancement would be to check if the module exists anywhere.</p>
+<p>
+</p>
+<h4><a name="function_testmanagertester_testgettestfixture">Function TestManagerTester  TestGetTestFixture</a></h4>
+<p>This tests the &quot;GetTestFixture&quot; procedure by passing a known module to it and comparing
+the name of the module returned to the name passed.</p>
+<p>
+</p>
+<h4><a name="function_testmanagertester_testgettestfixtures">Function TestManagerTester  TestGetTestFixtures</a></h4>
+<p>This tests the &quot;GetTestFixtures&quot; by ensuring that the five test modules of the add-in's own
+test suite are present.
+There is an issue. The tests assume the modules will be returned in a specific order. Since MainTester did not exist when the original add-in was assembled, it appears last in the list instead of first as the original tests assumed. Anyone assembling (rather than downloading complete) their own add-in may face the same issue. Changing the numbers to match the actual order is a perfectly acceptable way of getting around the problem. An enhancement would be to check if the module exists anywhere.</p>
+<p>
+</p>
+<h2><a name="testresultsmanagertester">TestResultsManagerTester</a></h2>
+<p>This is part of the test suite for the test harness add-in. Its primary purpose is to test
+the functionality of the &quot;TestResultsManager&quot; class module.</p>
+<p>
+</p>
+<h3><a name="testresultsmanagertester_macros">TestResultsManagerTester  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_testresultsmanagertester_testlogsuccess">Function TestResultsManagerTester  TestLogSuccess</a></h4>
+<p>This tests the LogSuccess procedure by calling it and LogFailure &amp; checking that the correct
+number of successes have been logged. Most of the logging is identical in TestLogFailure,
+making this pair a candidate for refactoring to remove duplication. However, it has been
+decided not to do this. The reason is that it is possible to write code to check for
+coverage and identify untested code. This will rely on every procedure having an
+appropriately named test procedure. Refactoring would put the tests for two procedures
+into a single test procedure, making coverage appear incomplete.</p>
+<p>
+</p>
+<h4><a name="function_testresultsmanagertester_testlogfailure">Function TestResultsManagerTester  TestLogFailure</a></h4>
+<p>Tests the &quot;LogFailure&quot; procedure. See above for refactoring idea.</p>
+<p>
+</p>
+<h4><a name="function_testresultsmanagertester_testtestcase">Function TestResultsManagerTester  TestTestCase</a></h4>
+<p>A &quot;TestCase&quot; is, for the purpose of this system, a set of tests that exist in a single
+procedure. The individual tests may pass or fail, and this procedure calls the start and
+end of case routines that would be called automatically. Between these calls, the
+procedure generates success and failure events. After cases are ended, the results are
+inspected to ensure they are correct.</p>
+<p>
+</p>
+<h4><a name="function_testresultsmanagertester_testtestfixture">Function TestResultsManagerTester  TestTestFixture</a></h4>
+<p>A &quot;Test Fixture&quot; is, for the purposes of this system, a module. When all tests in a module
+have been run, the system produces summary totals. This procedure simulates the calls that
+start and end the processing of a module containing tests and inspects the manager object
+to ensure it contains the correct summary information.</p>
+<p>
+</p>
+<h4><a name="function_testresultsmanagertester_testtestsuite">Function TestResultsManagerTester  TestTestSuite</a></h4>
+<p>A &quot;Test Suite&quot; is all the modules in a project that contain tests. This procedure emulates
+the generation of passes and fails and then inspects the manager object to ensure it
+contains the correct summary information.</p>
+<p>
+</p>
+<h2><a name="testrunnertester">TestRunnerTester</a></h2>
+<p>This is part of the test suite for the test harness add-in. Its primary purpose is to test
+the functionality of the &quot;TestRunner&quot; class module.</p>
+<p>
+</p>
+<h3><a name="testrunnertester_macros">TestRunnerTester  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_testrunnertester_testrun">Function TestRunnerTester  TestRun</a></h4>
+<p>The &quot;TestRunner&quot; class module has a &quot;Run&quot; method, which is used to process the tests in a
+module. This procedure invokes it, using a dummy test module, and then inspects the
+results manager for evidence that the tests have been run. The original version overwrote
+the Test Results Manager, causing this and all subsequent modules to report zero successes
+and zero failures. This has been changed by creating and restoring a backup of the TRM.</p>
+<p>
+</p>
+<h4><a name="function_testrunnertester_testshouldrunfixture">Function TestRunnerTester  TestShouldRunFixture</a></h4>
+<p>The &quot;ShouldRunFixture&quot; returns a boolean indicating whether a module contains tests that
+can be run. This procedure checks whether the replies are as expected.</p>
+<p>
+</p>
+<h2><a name="dummytestmodule">DummyTestModule</a></h2>
+<p>This is part of the test suite for the test harness add-in. It should not be changed except to support testing of the add-in, no matter how strange or redundant the procedures seem.
+It is treated as data by various testing modules.
+Procedures without runnable code have not been wrapped in error trapping or documented.</p>
+<p>
+</p>
+<h3><a name="dummytestmodule_macros">DummyTestModule  Macros</a></h3>
+<p>No runnable code</p>
+<p>
+</p>
+<h2><a name="dummytestmodule2">DummyTestModule2</a></h2>
+<p>This is part of the test suite for the test harness add-in. It should not be changed except to support testing of the add-in, no matter how strange or redundant the procedures seem.
+It is treated as data by various testing modules.
+Procedures without runnable code have not been wrapped in error trapping or documented.</p>
+<p>
+</p>
+<h3><a name="dummytestmodule2_macros">DummyTestModule2  Macros</a></h3>
+<p>No runnable code</p>
+<p>
+</p>
+<h2><a name="dummytestmodule3">DummyTestModule3</a></h2>
+<p>This is part of the test suite for the test harness add-in. It should not be changed except to support testing of the add-in, no matter how strange or redundant the procedures seem.
+It is treated as data by various testing modules.
+It contains code that actually
+runs and public variables that record whether the code has been run or not. This means that
+developers can verify that tests actually get run by the test harness.</p>
+<p>
+</p>
+<h3><a name="dummytestmodule3_macros">DummyTestModule3  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_dummytestmodule3_reset">Function DummyTestModule3  Reset</a></h4>
+<p><code>Reset()</code> As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Resets all global variables before tests are run. Will have to be called explicitly, since
+it is not called from the SetUp routine as one might expect. This ensures that false or
+missing calls to the SetUp procedure will not invalidate other tests.</p>
+<p>
+</p>
+<h4><a name="function_dummytestmodule3_callme">Function DummyTestModule3  CallMe</a></h4>
+<p><code>CallMe()</code> As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>From its name, this should not be called automatically, and so the boolean should remain
+false. However, it is called explicitly at various stages of the test process to prove
+that a process invoked by a caller other than VBA is properly called.</p>
+<p>
+</p>
+<h4><a name="function_dummytestmodule3_test1">Function DummyTestModule3  Test1</a></h4>
+<p>Test1() As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>This should be called automatically, setting the boolean to true.</p>
+<p>
+</p>
+<h4><a name="function_dummytestmodule3_test2">Function DummyTestModule3  Test2</a></h4>
+<p>Test2() As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>This should be called automatically, setting the boolean to true.</p>
+<p>
+</p>
+<h4><a name="function_dummytestmodule3_setup">Function DummyTestModule3  SetUp</a></h4>
+<p><code>SetUp()</code> As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>This should be called before anything else in this module.</p>
+<p>
+</p>
+<h4><a name="function_dummytestmodule3_teardown">Function DummyTestModule3  TearDown</a></h4>
+<p><code>TearDown()</code> As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>This should be called after everything else in this module.</p>
+<p>
+</p>
+<h2><a name="dummytestmodule4">DummyTestModule4</a></h2>
+<p>This is part of the test suite for the test harness add-in. It should not be changed except to support testing of the add-in, no matter how strange or redundant the procedures seem.
+It is treated as data by various testing modules.
+One of the procedures contains runnable code.
+Procedures without runnable code have not been wrapped in error trapping or documented.</p>
+<p>
+</p>
+<h3><a name="dummytestmodule4_macros">DummyTestModule4  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_dummytestmodule4_notatest">Function DummyTestModule4  NotATest</a></h4>
+<p><code>NotATest()</code> As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>If this is called, it will throw a failure.</p>
+<p>
+</p>
+<h2><a name="itestlogger">ITestLogger</a></h2>
+<p>This class module is implemented by two other class modules, &quot;DebugTestLogger&quot; and
+&quot;FakeDebugTestLogger&quot;. This is done so that the real logger can be used when the system is
+run live, but when the system is being used to test itself, the fake logger can be used.
+An example of this is the LogMsg function. This, in the live version, will print the
+input to the Immediate pane. In the fake version, it will append it to a variable so that
+it can be checked against the expected result.</p>
+<p>This has the effect of allowing overloading of methods. The calling code does not need to
+know whether it is running in live or test mode, as that is determined when the object is
+initialised as live or fake. This means that the code getting tested is the live code, not
+some special version that had to be written or called differently to be testable.</p>
+<p>The practical implication of this is that all procedures in this class module are stubs,
+since the functionality is implemented in other class modules. The procedures are listed,
+so that there is a definitive list that can be reviewed in the documentation, but no
+description has been provided beyond what appears here.</p>
+<p>The same technique is used in the &quot;*TestResultsManager&quot; class modules. The commentary on
+them refers to this section, rather than repeating the description. The documentation groups
+the class modules together, rather than retaining the alphabetical order shown in the GUI,
+as is more usual.</p>
+<p>
+</p>
+<h3><a name="itestlogger_macros">ITestLogger  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_itestlogger_logmsg">Function ITestLogger  LogMsg</a></h4>
+<p>
+</p>
+<h4><a name="function_itestlogger_logsuccess">Function ITestLogger  LogSuccess</a></h4>
+<p>
+</p>
+<h4><a name="function_itestlogger_logfailure">Function ITestLogger  LogFailure</a></h4>
+<p>
+</p>
+<h4><a name="function_itestlogger_starttestfixture">Function ITestLogger  StartTestFixture</a></h4>
+<p>
+</p>
+<h4><a name="function_itestlogger_endtestfixture">Function ITestLogger  EndTestFixture</a></h4>
+<p>
+</p>
+<h4><a name="function_itestlogger_starttestcase">Function ITestLogger  StartTestCase</a></h4>
+<p>All TestLogger.StartTestCase procedures are blank, so this has been commented out.</p>
+<p>
+</p>
+<h4><a name="function_itestlogger_endtestcase">Function ITestLogger  EndTestCase</a></h4>
+<p>
+</p>
+<h4><a name="function_itestlogger_endtestsuite">Function ITestLogger  EndTestSuite</a></h4>
+<p>
+</p>
+<h4><a name="property_let_itestlogger_expectednumtestcases">Property Let ITestLogger  ExpectedNumTestCases</a></h4>
+<p>This has been commented out of all class modules in which it appears. All such procedures
+are blank, except one that passes a variable from TestResultsManager to this empty
+procedure, and no class module contains a variable of this name. It is invoked by
+TestRunner.SetUpResultsManager (the section doing this has been commented out, too), but
+the property is never used. The original (MH) comments in the code say &quot;Results manager
+need to know how many tests case to expect to help it logging progress&quot; (sic). However,
+commenting everything out does not seem to cause the code any problems, returning exactly
+the same results and passing all internal tests. This smells like a relic.</p>
+<p>
+</p>
+<h2><a name="debugtestlogger">DebugTestLogger</a></h2>
+<p>This is the live implementation of the test logger.</p>
+<p>
+</p>
+<h3><a name="debugtestlogger_macros">DebugTestLogger  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_debugtestlogger_itestlogger_logmsg">Function DebugTestLogger  ITestLogger_LogMsg</a></h4>
+<p>Outputs the string parameter it receives (if any) to the Immediate pane.</p>
+<p>
+</p>
+<h4><a name="function_debugtestlogger_itestlogger_logsuccess">Function DebugTestLogger  ITestLogger_LogSuccess</a></h4>
+<p>Does nothing. Needed because the Fake equivalent takes action, so there must be a counterpart here.</p>
+<p>
+</p>
+<h4><a name="function_debugtestlogger_itestlogger_logfailure">Function DebugTestLogger  ITestLogger_LogFailure</a></h4>
+<p>Passes the calling name, the word &quot;failed&quot; and any message to the LogMsg procedure.</p>
+<p>
+</p>
+<h4><a name="function_debugtestlogger_itestlogger_starttestfixture">Function DebugTestLogger  ITestLogger_StartTestFixture</a></h4>
+<p>Calls LogMsg with a string stating which test is starting.</p>
+<p>
+</p>
+<h4><a name="function_debugtestlogger_itestlogger_endtestfixture">Function DebugTestLogger  ITestLogger_EndTestFixture</a></h4>
+<p>Uses LogMsg to output a line detailing successes and failures of the module, a line of
+equals signs and a blank line.</p>
+<p>
+</p>
+<h4><a name="function_debugtestlogger_itestlogger_endtestcase">Function DebugTestLogger  ITestLogger_EndTestCase</a></h4>
+<p>Reports the success and failure count.</p>
+<p>
+</p>
+<h4><a name="function_debugtestlogger_itestlogger_endtestsuite">Function DebugTestLogger  ITestLogger_EndTestSuite</a></h4>
+<p>Appends data to a string for later checking against an expected value.</p>
+<p>
+</p>
+<h2><a name="fakedebugtestlogger">FakeDebugTestLogger</a></h2>
+<p>This is the fake implementation of &quot;ITestLogger&quot;. See <a href="#itestlogger">ITestLogger</a> for more details.</p>
+<p>
+</p>
+<h3><a name="fakedebugtestlogger_macros">FakeDebugTestLogger  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_fakedebugtestlogger_itestlogger_logmsg">Function FakeDebugTestLogger  ITestLogger_LogMsg</a></h4>
+<p>Stores the message parameter to a module level variable, delimited by colons. All other
+functions in this module append to the variable via this function. Explanations should
+be added only when this principle is broken. All procedures are listed for completeness,
+but the lack of documentation merely indicates that they work as described here.</p>
+<p>
+</p>
+<h4><a name="function_fakedebugtestlogger_itestlogger_logsuccess">Function FakeDebugTestLogger  ITestLogger_LogSuccess</a></h4>
+<p>
+</p>
+<h4><a name="function_fakedebugtestlogger_itestlogger_logfailure">Function FakeDebugTestLogger  ITestLogger_LogFailure</a></h4>
+<p>
+</p>
+<h4><a name="function_fakedebugtestlogger_itestlogger_starttestfixture">Function FakeDebugTestLogger  ITestLogger_StartTestFixture</a></h4>
+<p>
+</p>
+<h4><a name="function_fakedebugtestlogger_itestlogger_endtestfixture">Function FakeDebugTestLogger  ITestLogger_EndTestFixture</a></h4>
+<p>
+</p>
+<h4><a name="function_fakedebugtestlogger_itestlogger_endtestcase">Function FakeDebugTestLogger  ITestLogger_EndTestCase</a></h4>
+<p>
+</p>
+<h4><a name="function_fakedebugtestlogger_itestlogger_endtestsuite">Function FakeDebugTestLogger  ITestLogger_EndTestSuite</a></h4>
+<p>
+</p>
+<h2><a name="itestresultsmanager">ITestResultsManager</a></h2>
+<p>See <a href="#itestlogger">ITestLogger</a> for a description of how these three modules, ITestResultsManager, TestResultsManager and FakeTestResultsManager work together. This also describes the need for stub functions. The absence of any documentation merely indicates that the function is a stub by design or that the code is so trivial it can be inferred from the name.</p>
+<p>
+</p>
+<h3><a name="itestresultsmanager_macros">ITestResultsManager  Macros</a></h3>
+<p>
+</p>
+<h4><a name="property_set_itestresultsmanager_testlogger">Property Set ITestResultsManager  testLogger</a></h4>
+<p>
+</p>
+<h4><a name="property_get_itestresultsmanager_totalsuccesscount">Property Get ITestResultsManager  TotalSuccessCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_itestresultsmanager_totalfailurecount">Property Get ITestResultsManager  TotalFailureCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_itestresultsmanager_fixturesuccesscount">Property Get ITestResultsManager  FixtureSuccessCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_itestresultsmanager_fixturefailurecount">Property Get ITestResultsManager  FixtureFailureCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_itestresultsmanager_testcasesuccesscount">Property Get ITestResultsManager  TestCaseSuccessCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_itestresultsmanager_testcasefailurecount">Property Get ITestResultsManager  TestCaseFailureCount</a></h4>
+<p>
+</p>
+<h4><a name="function_itestresultsmanager_logsuccess">Function ITestResultsManager  LogSuccess</a></h4>
+<p>
+</p>
+<h4><a name="function_itestresultsmanager_logfailure">Function ITestResultsManager  LogFailure</a></h4>
+<p>
+</p>
+<h4><a name="function_itestresultsmanager_starttestfixture">Function ITestResultsManager  StartTestFixture</a></h4>
+<p>
+</p>
+<h4><a name="function_itestresultsmanager_endtestfixture">Function ITestResultsManager  EndTestFixture</a></h4>
+<p>
+</p>
+<h4><a name="function_itestresultsmanager_starttestcase">Function ITestResultsManager  StartTestCase</a></h4>
+<p>
+</p>
+<h4><a name="function_itestresultsmanager_endtestcase">Function ITestResultsManager  EndTestCase</a></h4>
+<p>
+</p>
+<h4><a name="function_itestresultsmanager_endtestsuite">Function ITestResultsManager  EndTestSuite</a></h4>
+<p>
+</p>
+<h2><a name="testresultsmanager">TestResultsManager</a></h2>
+<p>See <a href="#itestlogger">ITestLogger</a> for a description of how these three modules, ITestResultsManager, TestResultsManager and FakeTestResultsManager work together. This also describes the need for stub functions. The absence of any documentation merely indicates that the function is a stub by design or that the code is so trivial it can be inferred from the name.</p>
+<p>
+</p>
+<h3><a name="testresultsmanager_macros">TestResultsManager  Macros</a></h3>
+<p>
+</p>
+<h4><a name="sub_testresultsmanager_class_initialize">Sub TestResultsManager  Class_Initialize</a></h4>
+<p>Excel requires this to be written as a sub.</p>
+<p>
+</p>
+<h4><a name="property_set_testresultsmanager_itestresultsmanager_testlogger">Property Set TestResultsManager  ITestResultsManager_TestLogger</a></h4>
+<p>
+</p>
+<h4><a name="property_get_testresultsmanager_itestresultsmanager_totalsuccesscount">Property Get TestResultsManager  ITestResultsManager_TotalSuccessCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_testresultsmanager_itestresultsmanager_totalfailurecount">Property Get TestResultsManager  ITestResultsManager_TotalFailureCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_testresultsmanager_itestresultsmanager_fixturesuccesscount">Property Get TestResultsManager  ITestResultsManager_FixtureSuccessCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_testresultsmanager_itestresultsmanager_fixturefailurecount">Property Get TestResultsManager  ITestResultsManager_FixtureFailureCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_testresultsmanager_itestresultsmanager_testcasesuccesscount">Property Get TestResultsManager  ITestResultsManager_TestCaseSuccessCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_testresultsmanager_itestresultsmanager_testcasefailurecount">Property Get TestResultsManager  ITestResultsManager_TestCaseFailureCount</a></h4>
+<p>
+</p>
+<h4><a name="function_testresultsmanager_itestresultsmanager_logsuccess">Function TestResultsManager  ITestResultsManager_LogSuccess</a></h4>
+<p>Increments success counts and calls TestLogger's LogSuccess procedure.</p>
+<p>
+</p>
+<h4><a name="function_testresultsmanager_itestresultsmanager_logfailure">Function TestResultsManager  ITestResultsManager_LogFailure</a></h4>
+<p>Increments failure counts and calls TestLogger's LogFailure procedure.</p>
+<p>
+</p>
+<h4><a name="function_testresultsmanager_itestresultsmanager_starttestfixture">Function TestResultsManager  ITestResultsManager_StartTestFixture</a></h4>
+<p>Sets counts to zero.</p>
+<p>
+</p>
+<h4><a name="function_testresultsmanager_itestresultsmanager_endtestfixture">Function TestResultsManager  ITestResultsManager_EndTestFixture</a></h4>
+<p>Calls the logger's EndTestFixture procedure.</p>
+<p>
+</p>
+<h4><a name="function_testresultsmanager_itestresultsmanager_starttestcase">Function TestResultsManager  ITestResultsManager_StartTestCase</a></h4>
+<p>Sets all case counts to zero.</p>
+<p>
+</p>
+<h4><a name="function_testresultsmanager_itestresultsmanager_endtestcase">Function TestResultsManager  ITestResultsManager_EndTestCase</a></h4>
+<p>Calls the logger's EndTestCase procedure.</p>
+<p>
+</p>
+<h4><a name="function_testresultsmanager_itestresultsmanager_endtestsuite">Function TestResultsManager  ITestResultsManager_EndTestSuite</a></h4>
+<p>Calls the logger's EndTestSuite procedure.</p>
+<p>
+</p>
+<h2><a name="faketestresultsmanager">FakeTestResultsManager</a></h2>
+<p>See <a href="#itestlogger">ITestLogger</a> for a description of how these three modules, ITestResultsManager, TestResultsManager and FakeTestResultsManager work together. This also describes the need for stub functions. The absence of any documentation merely indicates that the function is a stub by design or that the code is so trivial it can be inferred from the name.</p>
+<p>
+</p>
+<h3><a name="faketestresultsmanager_macros">FakeTestResultsManager  Macros</a></h3>
+<p>
+</p>
+<h4><a name="property_set_faketestresultsmanager_itestresultsmanager_testlogger">Property Set FakeTestResultsManager  ITestResultsManager_TestLogger</a></h4>
+<p>
+</p>
+<h4><a name="property_get_faketestresultsmanager_itestresultsmanager_totalsuccesscount">Property Get FakeTestResultsManager  ITestResultsManager_TotalSuccessCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_faketestresultsmanager_itestresultsmanager_totalfailurecount">Property Get FakeTestResultsManager  ITestResultsManager_TotalFailureCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_faketestresultsmanager_itestresultsmanager_fixturesuccesscount">Property Get FakeTestResultsManager  ITestResultsManager_FixtureSuccessCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_faketestresultsmanager_itestresultsmanager_fixturefailurecount">Property Get FakeTestResultsManager  ITestResultsManager_FixtureFailureCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_faketestresultsmanager_itestresultsmanager_testcasesuccesscount">Property Get FakeTestResultsManager  ITestResultsManager_TestCaseSuccessCount</a></h4>
+<p>
+</p>
+<h4><a name="property_get_faketestresultsmanager_itestresultsmanager_testcasefailurecount">Property Get FakeTestResultsManager  ITestResultsManager_TestCaseFailureCount</a></h4>
+<p>
+</p>
+<h4><a name="function_faketestresultsmanager_itestresultsmanager_logsuccess">Function FakeTestResultsManager  ITestResultsManager_LogSuccess</a></h4>
+<p>
+</p>
+<h4><a name="function_faketestresultsmanager_itestresultsmanager_logfailure">Function FakeTestResultsManager  ITestResultsManager_LogFailure</a></h4>
+<p>
+</p>
+<h4><a name="function_faketestresultsmanager_itestresultsmanager_starttestfixture">Function FakeTestResultsManager  ITestResultsManager_StartTestFixture</a></h4>
+<p>
+</p>
+<h4><a name="function_faketestresultsmanager_itestresultsmanager_endtestfixture">Function FakeTestResultsManager  ITestResultsManager_EndTestFixture</a></h4>
+<p>
+</p>
+<h4><a name="function_faketestresultsmanager_itestresultsmanager_starttestcase">Function FakeTestResultsManager  ITestResultsManager_StartTestCase</a></h4>
+<p>Appends text to a string.</p>
+<p>
+</p>
+<h4><a name="function_faketestresultsmanager_itestresultsmanager_endtestcase">Function FakeTestResultsManager  ITestResultsManager_EndTestCase</a></h4>
+<p>Appends text to a string.</p>
+<p>
+</p>
+<h4><a name="function_faketestresultsmanager_itestresultsmanager_endtestsuite">Function FakeTestResultsManager  ITestResultsManager_EndTestSuite</a></h4>
+<p>Appends text to a string.</p>
+<p>
+</p>
+<h2><a name="testfixture">TestFixture</a></h2>
+<p>This class module contains variables indicating what procedures a module contains
+and code to calculate their values as well as to run the tests in that module.</p>
+<p>
+</p>
+<h3><a name="testfixture_macros">TestFixture  Macros</a></h3>
+<p>
+</p>
+<h4><a name="property_get_testfixture_testprocedures">Property Get TestFixture  TestProcedures</a></h4>
+<p>
+</p>
+<h4><a name="property_get_testfixture_filename">Property Get TestFixture  FileName</a></h4>
+<p>
+</p>
+<h4><a name="property_get_testfixture_fixturename">Property Get TestFixture  fixtureName</a></h4>
+<p>
+</p>
+<h4><a name="property_get_testfixture_hassetupfunction">Property Get TestFixture  HasSetUpFunction</a></h4>
+<p>
+</p>
+<h4><a name="property_get_testfixture_hasteardownfunction">Property Get TestFixture  HasTearDownFunction</a></h4>
+<p>
+</p>
+<h4><a name="property_get_testfixture_hasfixturesetupfunction">Property Get TestFixture  HasFixtureSetUpFunction</a></h4>
+<p>
+</p>
+<h4><a name="property_get_testfixture_hasfixtureteardownfunction">Property Get TestFixture  HasFixtureTearDownFunction</a></h4>
+<p>
+</p>
+<h4><a name="function_testfixture_runtests">Function TestFixture  RunTests</a></h4>
+<p>Runs all tests in a fixture (module), running the SetUp and TearDown functions before
+and after. Changed by JHD to run SetUp and TearDown once only, instead of for every
+iteration. FixtureSetUp and FixtureTearDown are not run - perhaps these can be
+refactored out. A search reveals no part of the code where they might be run, although
+stubs exist in the dummy modules. Inserting &quot;AssertSuccess&quot; or &quot;AssertFailure&quot; into
+DummytestModule2.FixtureSetUp generates no failures in the tests. Putting a breakpoint on
+the relevant line indicates that the line is never called. This is the only instance of
+FixtureSetUp in the system. There are no instances of FixtureTearDown. Added feature:
+warns if there is a SetUp but no TearDown, as the original system might be
+damaged by the process of testing if repeated changes are made without being undone.</p>
+<p>
+</p>
+<h4><a name="function_testfixture_invokeproc">Function TestFixture  InvokeProc</a></h4>
+<p>This will invoke any procedure, function or sub, but wraps in a results manager's
+StartTestCase and EndTestCase routines. No parameters are passed to the procedure
+unless they are in the string passed as a parameter to this routine that gives
+the parameters to be passed. In other words, parameters are passed ByVal and are
+the responsibility of the calling routine. However, the routine actually called - the test
+case - can pass whatever parameters it chooses to whatever procedures it chooses without
+restriction. The idea is that this routine will call the Test* procedures in a module
+and that these will call procedures to be tested with the necessary parameters. It's
+quite difficult to see why one would want a test procedure to receive parameters, but
+sooner or later, someone will find an application.</p>
+<p>
+</p>
+<h4><a name="function_testfixture_extracttestcases">Function TestFixture  ExtractTestCases</a></h4>
+<p>Extracts the test cases from a test fixture (a procedure), populating them into the
+mTestProcedures array of this class. Also populates the booleans that indicate whether
+certain procedures exist.</p>
+<p>
+</p>
+<h4><a name="function_testfixture_doesmethodexist">Function TestFixture  DoesMethodExist</a></h4>
+<p>Identifies whether a procedure exists. It must be public, but since public is the
+default, it does not have to be stated explicitly. It must be a sub or function, i.e. not
+a &quot;Property *&quot; procedure. It can't be a &quot;Friend&quot; or &quot;Private&quot; function or sub. The reason
+for this strange set of restrictions is that the purpose is to find the SetUp and
+TearDown functions that will always adhere to these restrictions. If you are planning to
+use it for any other purpose, you are advised to write your own function under a different
+name. Base it on this, by all means. But changing this, unless MH and JHD have created a
+monster, is a Bad Idea(tm).</p>
+<p>
+</p>
+<h4><a name="function_testfixture_extractfilename">Function TestFixture  ExtractFileName</a></h4>
+<p>Given a fully qualifies file name, extracts solely the file name.</p>
+<p>
+</p>
+<h4><a name="function_testfixture_gettestmethods">Function TestFixture  GetTestMethods</a></h4>
+<p>Rewritten by JHD to avoid the need for a count.</p>
+<p>
+</p>
+<h4><a name="function_testfixture_istestmethodline">Function TestFixture  IsTestMethodLine</a></h4>
+<p>Originally, this compared the start of a line to a single string. It has been modified by
+JHD to strip out &quot;Public&quot; to allow the running of code not explicitly declared as Public
+(the default) and to identify functions as well as subs, to allow
+comprehensive error trapping.</p>
+<p>
+</p>
+<h2><a name="testmanager">TestManager</a></h2>
+<p>This should not be confused with Test<em>Results</em>Manager, which handles the outputs from
+tests. This class manages the tests themselves, or more accurately the modules that contain
+tests. It has functions to determine which modules (fixtures) in a project are so named
+as to indicate that they might contain tests that should be run automatically. Two private
+constants have been moved to &quot;Main&quot; and made public as they are used by modRetroFit.</p>
+<p>
+</p>
+<h3><a name="testmanager_macros">TestManager  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_testmanager_gettestfixtures">Function TestManager  GetTestFixtures</a></h4>
+<p>Given a project name as a string, returns an array of modules capable of containing tests.</p>
+<p>
+</p>
+<h4><a name="function_testmanager_gettestfixture">Function TestManager  GetTestFixture</a></h4>
+<p>Given the names of a project and a fixture (module), returns that fixture as an object.</p>
+<p>
+</p>
+<h4><a name="function_testmanager_gettestingcomponents">Function TestManager  GetTestingComponents</a></h4>
+<p>Given a project as an object, returns as objects an array of fixtures (modules) that might
+contain tests.</p>
+<p>
+</p>
+<h4><a name="function_gettestingcomponentscount">Function GetTestingComponentsCount</a></h4>
+<p>Refactored out to remove the double loop and the need for a count.</p>
+<p>
+</p>
+<h4><a name="function_testmanager_istestcomponent">Function TestManager  IsTestComponent</a></h4>
+<p>Two of three conditions are needed for this to return True. The object must be a
+standard code module and the name must either start or end (or both) with the designated
+text. The text is held in constants, and at the time of documenting was &quot;Test&quot; for the
+prefix and &quot;Tester&quot; for the suffix. There is no obvious reason for this to need to change.</p>
+<p>
+</p>
+<h2><a name="testrunner">TestRunner</a></h2>
+<p>The purpose of this class is to organise the running of tests. It is stateless.</p>
+<p>
+</p>
+<h3><a name="testrunner_macros">TestRunner  Macros</a></h3>
+<p>
+</p>
+<h4><a name="function_testrunner_run">Function TestRunner  Run</a></h4>
+<p>Given the name of a project as a string and a results manager as an object (remember that
+the ITestResultsManager class has two implementation classes), runs all tests within the
+project. Optionally, the name of a fixture (module) may be passed as a third argument, in
+which case only the tests in that fixture are run.</p>
+<p>
+</p>
+<h4><a name="function_testrunner_shouldrunfixture">Function TestRunner  ShouldRunFixture</a></h4>
+<p>This function returns a boolean indicating whether the module contains tests for running.
+Tests will not be run if a fixture (module) name is specified and does not match that of
+the first parameter. This function has been modified to make the fixture name an optional
+parameter.</p>
+<p>
+</p>
+<h4><a name="function_testrunner_gettestfixtures">Function TestRunner  GetTestFixtures</a></h4>
+<p>Given a project name as a string, a test manager as an object and a fixture (module) name
+as a string, returns an array of fixtures as objects.</p>
+<p>
+</p>
+<h2><a name="moderrortrap">modErrorTrap</a></h2>
+<p>This code module contains three public constants, two public variables and one procedure.
+The public variables are usually populated by an initialisation routine, but are not used
+outside this module.</p>
+<p>It should be possible to use the module in almost any file. It is possible to rewrite it
+so that the two global variables are passed as parameters, but as they are unlikely to
+change, it is felt that globals are better as they avoid the repetition of passing the
+same parameters from every procedure. For this application, the globals have been
+replaced with constants.</p>
+<p>
+</p>
+<h3><a name="moderrortrap_macros">modErrorTrap  Macros</a></h3>
+<p>
+</p>
+<h4><a name="sub_errtrap">Sub ErrTrap</a></h4>
+<p>This is the central error handling routine. Every procedure in the file has error traps
+that point to it. It accepts two to four parameters. The first two, compulsory, parameters
+form the name of the procedure where the error occurred. The third is a flag indicating
+whether to log errors to a file. It is a boolean, so if it is missing, it will
+default to FALSE. The fourth is a flag indicating whether to show message boxes when
+errors occur. The definition includes the default of &quot;True&quot;, as showing message boxes
+is strongly recommended.</p>
+<p>The procedure's first action is to record the
+state of the error object. Once this has been done, <code>On Error Resume Next</code> is used to
+prevent any infinite recursive calls to the error trap. The <code>On Error Resume Next</code>
+statement has the potential to reset the error object, so it cannot be invoked until
+the contents of the error object have been recorded.</p>
+<p>At last, the processing of the error can begin. Errors can be reported in either or both
+of two ways. They can be logged in a file and a messagebox can be shown. The first test
+is for the log file. The boolean parameter is tested, but the length of the file name
+is also tested to make sure that it is non-zero, i.e. that there is a file name. It is
+the developer's responsibility to make sure that the file name is kosher and that it
+will not conflict with any existing file. No checking of this has been done - at some
+level, the developer has to be trusted to get things right. A line of text is appended to
+the file, which is then closed.</p>
+<p>The next section of code deals with messageboxes. The box contains four lines:</p>
+<ol>
+<li><strong><a name="the_error_number" class="item">The error number</a></strong>
+
+</li>
+<li><strong><a name="the_vba_description_of_the_error" class="item">The VBA description of the error</a></strong>
+
+</li>
+<li><strong><a name="the_routine_in_which_the_error_occurred" class="item">The routine in which the error occurred</a></strong>
+
+</li>
+<li><strong><a name="the_name_or_function_to_whom_to_report_the_error" class="item">The name or function to whom to report the error</a></strong>
+
+</li>
+</ol>
+
+</body>
+
+</html>

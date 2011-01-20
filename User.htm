@@ -1,0 +1,392 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>VbaUnit version 14 - Unit Test harness for Excel VBA - User Documentation</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:" />
+</head>
+
+<body style="background-color: white">
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+<ul>
+
+	<li><a href="#introduction">Introduction</a></li>
+	<ul>
+
+		<li><a href="#overview__by_mh_">Overview (by MH)</a></li>
+		<li><a href="#to_do">To do</a></li>
+		<li><a href="#change_log">Change Log</a></li>
+		<ul>
+
+			<li><a href="#changes_from_version_r13">Changes from version r13</a></li>
+			<li><a href="#changes_in_previous_versions">Changes in previous versions</a></li>
+		</ul>
+
+		<li><a href="#authors">Authors</a></li>
+		<li><a href="#copyright">Copyright</a></li>
+	</ul>
+
+	<li><a href="#usage">Usage</a></li>
+	<ul>
+
+		<li><a href="#first_write_your_tests_">First write your tests!</a></li>
+		<ul>
+
+			<li><a href="#if_you_need_to_change_the_spreadsheet_before_your_tests_can_run____">If you need to change the spreadsheet before your tests can run ...</a></li>
+		</ul>
+
+		<li><a href="#then_run_them_">Then run them.</a></li>
+		<li><a href="#available_assert_commands">Available &quot;Assert&quot; commands</a></li>
+		<ul>
+
+			<li><a href="#asserttrue">AssertTrue</a></li>
+			<li><a href="#assertfalse">AssertFalse</a></li>
+			<li><a href="#assertequal">AssertEqual</a></li>
+			<li><a href="#assertsuccess">AssertSuccess</a></li>
+			<li><a href="#assertfailure">AssertFailure</a></li>
+		</ul>
+
+		<li><a href="#retrofit">RetroFit</a></li>
+		<li><a href="#coverage">Coverage</a></li>
+	</ul>
+
+</ul>
+
+<hr name="index" />
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<hr />
+<h1><a name="introduction">Introduction</a></h1>
+<p>
+</p>
+<h2><a name="overview__by_mh_">Overview (by MH)</a></h2>
+<p>A unit test framework similar to nunit (<a href="http://www.nunit.org/">http://www.nunit.org/</a>) and
+junit (<a href="http://www.junit.org/">http://www.junit.org/</a>), but for Excel VBA code.
+It is similar to the existing VbaUnit project in sourceforge but:</p>
+<ol>
+<li><strong><a name="there_is_no_self_modifying_code_so_is_easier_to_write_tests_to_test_itself" class="item">There is no self-modifying code, so is easier to write tests to test itself.</a></strong>
+
+</li>
+<li><strong><a name="tested" class="item">The code lives in an Excel addin so you do not need to copy the code into each
+project to be tested (obviously this makes it Excel specific).</a></strong>
+
+</li>
+<li><strong><a name="the_original_sourceforge_vbaunit_requires_you_to_call_a_prep_function_prior_to_running_your_tests_and_remembering_to_call_prep_when_you_add_remove_testing_functions_there_is_no_need_to_do_this_with_this_framework_just_call_xrun_to_execute_your_tests" class="item">The original sourceforge VbaUnit requires you to call a Prep function prior to
+running your tests and remembering to call Prep when you add/remove testing functions. There
+is no need to do this with this framework - just call xRun to execute your tests.</a></strong>
+
+</li>
+</ol>
+<p>
+</p>
+<h2><a name="to_do">To do</a></h2>
+<ul>
+<li><strong><a name="make_use_of_apps_hungarian_notation_consistent_throughout" class="item">Make use of Apps Hungarian notation consistent throughout.</a></strong>
+
+</li>
+<li><strong><a name="change_coverage_analysis_to_cope_with_multiple_implementations_of_class_modules" class="item">Change coverage analysis to cope with multiple implementations of class modules.</a></strong>
+
+</li>
+<li><strong><a name="formulae" class="item">Write documentation on how to test worksheet formulae (including TDD).</a></strong>
+
+</li>
+<li><strong><a name="write_a_gui" class="item">Write a GUI.</a></strong>
+
+</li>
+<li><strong><a name="sheet" class="item">Change the ErrorTrap constants back to their usual status as variables, including
+the options either on the GUI or on a sheet (usually very hidden). This will enable
+unattended, automated testing that can detect errors from the log file.</a></strong>
+
+</li>
+<li><strong><a name="add_class_modules_to_enable_test_results_to_be_logged_to_a_file_as_another_necessity_for_unattended_automated_testing" class="item">Add class modules to enable test results to be logged to a file as another necessity
+for unattended automated testing.</a></strong>
+
+</li>
+</ul>
+<p>
+</p>
+<h2><a name="change_log">Change Log</a></h2>
+<p>
+</p>
+<h3><a name="changes_from_version_r13">Changes from version r13</a></h3>
+<ul>
+<li><strong><a name="wrote_documentation_in_excelpod" class="item">Wrote documentation in ExcelPOD.</a></strong>
+
+</li>
+<li><strong><a name="added_comprehensive_error_trapping" class="item">Added comprehensive error trapping.</a></strong>
+
+</li>
+<li><strong><a name="refactored_certain_procedures_to_avoid_looping_twice_by_using_redim_preserve_certain_other_procedures_were_refactored_out_in_consequence_as_they_were_no_longer_useful" class="item">Refactored certain procedures to avoid looping twice by using ReDim Preserve.
+Certain other procedures were refactored out in consequence as they were no longer useful.</a></strong>
+
+</li>
+<li><strong><a name="2" class="item">Fixed issue 2 (<a href="http://code.google.com/p/excelvbaunit/issues/detail?id=2">http://code.google.com/p/excelvbaunit/issues/detail</a>)
+to allow test modules with no tests. This is important because users may already have
+modules called *Tester to test for other things. These would automatically be treated by
+xRun as modules expected to contain tests. It also allows projects without test modules.</a></strong>
+
+</li>
+<li><strong><a name="1" class="item">Fixed issue 1 (<a href="http://code.google.com/p/excelvbaunit/issues/detail?id=1">http://code.google.com/p/excelvbaunit/issues/detail</a>). This
+now produces a messagebox if the project can't be found.</a></strong>
+
+</li>
+<li><strong><a name="fixed_a_bug_in_testrunnertester_that_caused_it_to_report_zero_failures_and_zero_successes_not_only_for_itself_but_for_all_test_modules_run_subsequently" class="item">Fixed a bug in TestRunnerTester that caused it to report zero failures and zero
+successes, not only for itself but for all test modules run subsequently.</a></strong>
+
+</li>
+<li><strong><a name="changed_restrictions_on_subs_that_contain_tests_to_allow_functions_and_subs_that_are_not_explicitly_declared_as_public_but_still_excluding_private_and_friend" class="item">Changed restrictions on subs that contain tests to allow functions and subs that
+are not explicitly declared as Public, but still excluding Private and Friend.</a></strong>
+
+</li>
+<li><strong><a name="added_a_retrofitter_to_create_a_new_tester_module_and_test_stubs_for_any_module_that_does_not_already_have_one" class="item">Added a retrofitter to create a new Tester module and Test stubs for any module
+that does not already have one.</a></strong>
+
+</li>
+<li><strong><a name="added_a_coverage_analyst" class="item">Added a coverage analyst.</a></strong>
+
+</li>
+<li><strong><a name="warns_when_testing_if_there_is_a_setup_procedure_but_no_teardown" class="item">Warns when testing if there is a SetUp procedure but no TearDown.</a></strong>
+
+</li>
+<li><strong><a name="refactored_tests_that_look_for_modules_in_specific_orders_to_take_them_in_any_order" class="item">Refactored tests that look for modules in specific orders to take them in any order.</a></strong>
+
+</li>
+<li><strong><a name="changed_assertequal_to_cope_with_floating_point_differences" class="item">Changed AssertEqual to cope with floating point differences.</a></strong>
+
+</li>
+<li><strong><a name="retrofitted_tests_to_most_of_the_procedures_in_assert" class="item">Retrofitted tests to most of the procedures in Assert.</a></strong>
+
+</li>
+<li><strong><a name="changed_tests_for_modules_so_that_excel_did_not_need_to_store_them_in_any_specific_order" class="item">Changed tests for modules so that Excel did not need to store them in any specific
+order.</a></strong>
+
+</li>
+<li><strong><a name="retrofitted_a_new_maintester_as_the_one_needed_by_the_tests_was_not_in_the_repository" class="item">Retrofitted a new MainTester as the one needed by the tests was not in the
+repository.</a></strong>
+
+</li>
+</ul>
+<p>
+</p>
+<h3><a name="changes_in_previous_versions">Changes in previous versions</a></h3>
+<p>See <a href="http://code.google.com/p/excelvbaunit/">http://code.google.com/p/excelvbaunit/</a>.</p>
+<p>
+</p>
+<h2><a name="authors">Authors</a></h2>
+<p>The original author (and writer of most of the code) was Matt Helliwell (MH). The error
+trapping, coverage and retrofit code and most of the documentation were written by John
+Davies (JHD).</p>
+<p>
+</p>
+<h2><a name="copyright">Copyright</a></h2>
+<p><a href="http://www.gnu.org/licenses/lgpl.html">http://www.gnu.org/licenses/lgpl.html</a></p>
+<p>
+</p>
+<hr />
+<h1><a name="usage">Usage</a></h1>
+<p>
+</p>
+<h2><a name="first_write_your_tests_">First write your tests!</a></h2>
+<p>If you are new to testing and have a project to which you would like to add tests,
+the lazy way is to run RetroFit on all modules that contain testable code
+and then use this skeleton to write your tests.</p>
+<p>The &quot;proper&quot; way to use tests is in Test Driven Development (TDD). Searching will give a lot
+of results as this is a commonly used technique. TDD suggests that the following approach
+should be followed:</p>
+<ol>
+<li><strong><a name="write_a_test" class="item">Write a test.</a></strong>
+
+</li>
+<li><strong><a name="run_it_and_check_that_it_fails" class="item">Run it and check that it fails.</a></strong>
+
+</li>
+<li><strong><a name="now_only_now_write_the_code_to_make_it_pass" class="item">Now - only now - write the code to make it pass.</a></strong>
+
+</li>
+</ol>
+<p>Repeat this sequence until you have something that does what you want.</p>
+<p>However, I would add a step between 1 and 2 above. Write the test to call the new code
+you are going to write and make sure it doesn't compile. This step makes sure you are not
+by accident repeating a procedure name.</p>
+<p>VbaUnit is written as an add-in. However, it is necessary to put a reference to it in the
+project you wish to test.</p>
+<p>Tests should be written in standard code modules of their own. The modules should
+end with &quot;Tester&quot;. The tests should begin with &quot;Test&quot;. VbaUnit will then be able to find
+them automatically.</p>
+<p>The project should have its own, distinct name. Excel defaults to calling every project
+&quot;VbaProject&quot;. It is good standard practice to change this, but it is almost essential when
+using VbaUnit, as the project name needs to be given, and having two projects with the
+same name will confuse VbaUnit. This is very likely if &quot;VbaProject&quot; is retained for
+everything.</p>
+<p>Individual tests should be written in subs or functions with names starting with &quot;Test&quot;.
+The organisation of tests into subs is at the whim of the writer, but the following scheme
+is advised:</p>
+<ul>
+<li><strong><a name="each_code_module_has_its_own_tester_module" class="item">Each code module has its own &quot;Tester&quot; module.</a></strong>
+
+</li>
+<li><strong><a name="each_sub_or_function_has_its_own_test_sub_or_function" class="item">Each sub or function has its own &quot;Test&quot; sub or function.</a></strong>
+
+</li>
+</ul>
+<p>There is no obvious way to write tests for the class module procedures &quot;Property Get&quot;,
+&quot;Property Let&quot; and &quot;Property Set&quot;. If a project requires more than trivial code in
+such a procedure, it should be abstracted to a function or sub called from the
+procedure. This function or sub can then be tested in the usual way.</p>
+<p>Variables that are declared at module level are hard to test. Either they have to be
+declared Public, which would make them accessible to the Tester module but which is a
+Bad Thing(tm), or the test routines have to be written in the live module. Not only does
+this make test routines dangerous - they might be invoked by accident by a maintenance
+programmer - but they cannot be run automatically by xRun, nor can the coverage calculator
+identify them properly. The &quot;proper&quot; way to do this is by means of multiple implementations
+of class modules. This project demonstrates how this is achieved in the &quot;TestResultsManager&quot;
+class modules and the &quot;TestResultsManagerTester&quot; standard code module. However, it is not
+for the faint hearted, requiring a detailed understanding of how class modules implement
+overloading. If this sounds too technical for you, it's best to accept that you can't test
+assignments to module level variables and that coverage will be less than 100%. You can
+minimise the risks of this by doing as little as possible in routines that modify module
+level variables and moving everything else to procedures that don't modify module level
+variables. You can also fool the coverage calculator by ignoring the advice about
+segregating code and letting the coverage calculator report that all procedures have test
+procedures. This might get past a pointy haired boss, but it won't mean that you are testing
+your code adequately. This merely shows up one of the deficiencies in the coverage
+calculator. While it can determine whether a test procedure exists, it can't determine if
+it does the job properly.</p>
+<p>There are technical reasons why it is usually better to write functions than subs. This
+project is itself an example of one of the benefits. Every procedure is wrapped in error
+trapping, meaning that an error can pass a failure code back to the calling procedure.
+This, in turn, raises an error which is passed to its calling procedure and so on until
+the code terminates. This means that there is no code that shows the user the IDE and also
+that it is possible to enable a &quot;Full Trace&quot; mode that shows how a procedure that throws
+an error was called. This can make debugging much easier.</p>
+<p>However, the advantages of writing everything as functions are relatively minor and it is
+not the purpose of this system to compel a certain coding style. While there are no
+unnecessary subs in this system, that does not mean that no user will ever write another
+sub. The system can handle and test subs and functions with equal ease.</p>
+<p>The three test evaluators are
+AssertTrue, AssertFalse and AssertEqual. The first two test for conditions, while the last
+compares strings and numbers. Be aware of the standard issues in digital computing when
+using AssertEqual with floating point numbers. This is discussed in more detail in the
+section on <a href="#assertequal_expected_as_variant__actual_as_variant_">AssertEqual</a>.</p>
+<p>
+</p>
+<h3><a name="if_you_need_to_change_the_spreadsheet_before_your_tests_can_run____">If you need to change the spreadsheet before your tests can run ...</a></h3>
+<p>If a sub called &quot;SetUp&quot; exists, it will be invoked by the test process before any tests are
+run. This will
+happen regardless of where such a sub appears in the module, but it must be in the same
+module as the tests themselves. If your mother doesn't live in the spreadsheet, you can tidy
+up after yourself by means of another sub called &quot;TearDown&quot;.</p>
+<p>
+</p>
+<h2><a name="then_run_them_">Then run them.</a></h2>
+<p>Running the tests is easy. From the IDE (the interface where you write your code), hit
+{Ctrl G} to get to the Immediate pane and type <code>xrun projectname</code>, replacing
+<code>projectname</code> with the name of your project. This will run all the tests in the project
+automagically.</p>
+<p>Tests must be run from the Immediate pane. The command &quot;xRun &lt;project name&gt;&quot; will run all
+tests in the named project. Optionally, you can name the module containing the tests you
+want to run. This is useful if you have multiple modules containing tests, but want to run
+only some of them. There is no provision for running only certain tests within a module.</p>
+<p>Results are logged to the Immediate pane. It is planned to enable logging to a file - see
+<a href="#to_do">To Do</a>.</p>
+<p>
+</p>
+<h2><a name="available_assert_commands">Available &quot;Assert&quot; commands</a></h2>
+<p>AssertTrue, AssertFalse, AssertEqual and AssertFailure have an optional
+string parameter. This will appear in the log if the test fails, which
+in the case of AssertFailure is always.</p>
+<p>
+</p>
+<h3><a name="asserttrue">AssertTrue</a></h3>
+<p>AssertTrue(test As Boolean, Optional msg As String = &quot;&quot;) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Accepts a boolean which will be true if the test has passed. Logs the result via the
+test result manager.</p>
+<p>
+</p>
+<h3><a name="assertfalse">AssertFalse</a></h3>
+<p>AssertFalse(test As Boolean, Optional msg As String = &quot;&quot;) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Accepts a boolean which will be false if the test has passed. Logs the result via the
+test result manager.</p>
+<p>
+</p>
+<h3><a name="assertequal">AssertEqual</a></h3>
+<p>AssertEqual(expected As Variant, actual As Variant, Optional msg As String = &quot;&quot;) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Accepts two values that will be equal if the test has passed. In the case of floating point
+numbers, &quot;Equal&quot; is taken to mean that the ratio of the two is 1 if rounded to five decimal
+places. If this is not suitable for your application, you may need to write your own, more
+accurate test and use <a href="#function_assert_assertsuccess">AssertSuccess</a> and
+<a href="#function_assert_assertfailure">AssertFailure</a> to get the results you need. In this
+situation, you should know enough about floating point accuracy issues at least to find out
+more on them using a search engine. They are widely documented.</p>
+<p>
+</p>
+<h3><a name="assertsuccess">AssertSuccess</a></h3>
+<p>Returns True if an error occurs.</p>
+<p>This function takes no parameters. It can be used if the previous &quot;Assert&quot; tests do not
+provide the needed functionality when a test has met the user's definition of success.</p>
+<p>
+</p>
+<h3><a name="assertfailure">AssertFailure</a></h3>
+<p>AssertFailure(Optional msg As String = &quot;&quot;) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>This is the converse of AssertSuccess.</p>
+<p>
+</p>
+<h2><a name="retrofit">RetroFit</a></h2>
+<p>RetroFit(sMod As String, Optional bFn As Boolean = True,
+Optional bAddErrTrap As Boolean = True, Optional bPOD As Boolean = True) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>This function is called from the Immediate pane. Given a string parameter of the name of a
+module, it will create a new module to test it. The name should be in the fully qualified
+form of project.module. If the project is omitted, the add-in itself will be assumed.
+There are three optional boolean parameters. The first indicates whether functions are
+to be used. This defaults to True, but some users may prefer subs. The second indicates
+whether an error trap is to be added. Again, this defaults to True. The last indicates
+whether POD is to be added. Obviously, this is the framework only, but if it is True
+(again, this is the default), the framework will be added both to the top of the new
+module and to the top of each generated procedure stub.</p>
+<p>If you are reading this without any idea of what POD is, it is the comments in the code
+that are processed into the document you are currently reading. It makes documentation
+less work and is a Good Thing(tm). It has been snarfed shamelessly from Perl (indeed, the
+ExcelPOD code that turns comments into documentation is written in Perl) and stands for
+Plain Old Documentation.</p>
+<p>
+</p>
+<h2><a name="coverage">Coverage</a></h2>
+<p>Coverage(Optional sPrj As String, Optional sMod As String) As Boolean</p>
+<p>Returns True if an error occurs.</p>
+<p>Takes two optional string parameters. The first is the name of the project, assumed to
+be the add-in if empty. The second is the name of the module to be analysed. If no
+module is specified, every module in the project that has a &quot;Tester&quot; module will be
+analysed. To run this, type <code>coverage [project][,module]</code> in the immediate pane.</p>
+<p>The coverage analysis will return three statistics for each pair of modules. These are
+&quot;tested&quot;, &quot;untested&quot; and &quot;unmatched&quot;. The &quot;tested&quot; statistic gives the number of procedures
+(always excluding Property* procedures in class modules) that have a matching Test
+procedure. The match is independent of the procedure type, so a &quot;Friend Sub&quot;'s matching
+test can be a Function. The &quot;untested&quot; statistic is the number of procedures in the live
+module that have no direct equivalent in the test module. The &quot;unmatched&quot; statistic is the
+number of procedures in the test module that have no equivalent in the live module.</p>
+<p>These statistics should not be used blindly. They are merely a test of procedure names, not
+of the quantity or quality of the tests in testing procedures. Simply running RetroFit
+will create statistics implying 100% coverage, even though no tests have been written.
+Conversely, class modules that implement other class modules will result in statistics
+suggesting that nothing is tested. This is because the procedure names in the implementing
+class module will have names that point to the implemented class module, while the testing
+module will not have the name of the implemented class module in the name of the
+procedure. It is conceivable that this will be circumvented in a later version.</p>
+
+</body>
+
+</html>

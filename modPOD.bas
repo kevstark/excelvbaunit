@@ -1,8 +1,8 @@
 Attribute VB_Name = "modPOD"
 Option Explicit
 'This is written for ExcelPOD, and, if processed properly, will produce HTML documentation.
-Rem title VbaUnit version 14 - Unit Test harness for Excel VBA - User Documentation
-Rem title VbaUnit version 14 - Unit Test harness for Excel VBA - Technical Documentation
+Rem title VbaUnit version 16 - Unit Test harness for Excel VBA - User Documentation
+Rem title VbaUnit version 16 - Unit Test harness for Excel VBA - Technical Documentation
 Rem order 1
 Rem docs 2
 Rem doc 1 2
@@ -50,6 +50,18 @@ Rem
 Rem =back
 Rem
 Rem =head2 Change Log
+Rem
+Rem =head3 Changes from version r15
+Rem
+Rem =over
+Rem
+Rem =item * Fixed a bug (divide by zero) in AssertEqual that was introduced in r14.
+Rem
+Rem =back
+Rem
+Rem =head3 Changes from version r14
+Rem
+Rem r15 was an additional version number generated automatically when a wiki page was added.
 Rem
 Rem =head3 Changes from version r13
 Rem

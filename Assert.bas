@@ -162,6 +162,9 @@ On Error GoTo ErrorHandler
 
     If expected = actual Then
         If mTestResultManager.LogSuccess Then err.Raise knCall, , ksCall
+    ElseIf actual = 0 Then
+        If mTestResultManager.LogFailure("Expected '" & expected & _
+                            "', got 0. " & msg) Then err.Raise knCall, , ksCall
     ElseIf IsNumeric(expected) _
            And IsNumeric(actual) Then
         If (VarType(expected) = vbSingle _

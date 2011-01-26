@@ -87,7 +87,7 @@ TestAssertFalse = True
 End Function
 Rem =head4 Function TestAssertEqual
 Rem
-Rem 8 tests reported as 2.
+Rem 9 tests reported as 2.
 Rem
 Function TestAssertEqual()
 On Error GoTo ErrorHandler
@@ -114,12 +114,13 @@ On Error GoTo ErrorHandler
     c = b - 1
     If AssertEqual(a, c, "Tough float pass") Then err.Raise knCall, , ksCall
     If AssertEqual("a", a, "Mixed type fail - intentional") Then err.Raise knCall, , ksCall
+    If AssertEqual(1, 0, "Divide by zero fail - intentional") Then err.Raise knCall, , ksCall
     
     If RestoreTRM Then err.Raise knCall, , ksCall
     nTRMTrue = trmTest.ITestResultsManager_TestCaseSuccessCount
     nTRMFalse = trmTest.ITestResultsManager_TestCaseFailureCount
     If AssertEqual(4, nTRMTrue) Then err.Raise knCall, , ksCall
-    If AssertEqual(4, nTRMFalse) Then err.Raise knCall, , ksCall
+    If AssertEqual(5, nTRMFalse) Then err.Raise knCall, , ksCall
     Set trmTest = Nothing
     Set tlTest = Nothing
 
